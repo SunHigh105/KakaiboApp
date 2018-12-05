@@ -42,19 +42,20 @@
             <div class="col">
 
                 <!-- input form tab -->
-                <ul class="input-form nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="outgo-tab" data-toggle="tab" href="#outgo" role="tab" aria-controls="outgo" aria-selected="true">支出</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="income-tab" data-toggle="tab" href="#income" role="tab" aria-controls="income" aria-selected="false">収入</a>
-                    </li>
-                </ul>
+                <!--<ul class="input-form nav nav-tabs" id="myTab" role="tablist">-->
+                    <!--<li class="nav-item">-->
+                        <!--<a class="nav-link active" id="outgo-tab" data-toggle="tab" href="#outgo" role="tab" aria-controls="outgo" aria-selected="true">支出</a>-->
+                    <!--</li>-->
+                    <!--<li class="nav-item">-->
+                        <!--<a class="nav-link" id="income-tab" data-toggle="tab" href="#income" role="tab" aria-controls="income" aria-selected="false">収入</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
 
-                <div class="tab-content" id="myTabContent">
+                <!--<div class="tab-content" id="myTabContent">-->
 
                     <!-- outgo -->
-                    <div class="input-form tab-pane fade show active" id="outgo" role="tabpanel" aria-labelledby="outgo-tab">
+                    <div class="input-form" id="outgo" role="tabpanel" aria-labelledby="outgo-tab">
+                        <h4>【支出】</h4>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">日付</label>
                             <div class="col-sm-6">
@@ -87,8 +88,11 @@
                         <button class="btn btn-primary">入力する</button>
                     </div>
 
+                    <hr>
+
                     <!-- income -->
-                    <div class="input-form　tab-pane fade" id="income" role="tabpanel" aria-labelledby="income-tab">
+                    <div class="input-form" id="income" role="tabpanel" aria-labelledby="income-tab">
+                        <h4>【収入】</h4>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">日付</label>
                             <div class="col-sm-6">
@@ -121,12 +125,18 @@
                         <button class="btn btn-primary">入力する</button>
                     </div>
 
-                </div>
+                <!--</div>-->
 
             </div>
 
         </div>
     </div>
+    <script>
+        $('#nav-tab a').on('click', function (e) {
+          e.preventDefault()
+          $(this).tab('show')
+        })
+    </script>
 
 </body>
 </html>
