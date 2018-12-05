@@ -2,12 +2,104 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <title>KakeiboApp</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css" />
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/css/custom.css" />
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.js"></script>
 </head>
 <body>
+    <!-- header -->
+    <nav class="navbar navbar-dark" style="background-color: #34302c;">
+        <div class="container">
+            <a class="navbar-brand"><h2 class="logo">KakeiboApp</h2></a>
+            <div class="account">
+                <ul>
+                    <li class="account-link"><img src="../static/img/user.ico" width="60%"></li>
+                    <li class="account-link"><span>ユーザー さん</span></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+
+            <!-- left side bar -->
+            <div class="col sidebar">
+                <ul class="nav flex-column nav-pills">
+                    <li class="nav-item"><a class="nav-link active" href="../templates/new.html">入力</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../templates/month.html">月別一覧</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../templates/year.html">年間一覧</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../templates/setting.html">設定</a></li>
+                </ul>
+            </div>
+
+            <!-- Main contents -->
+            <div class="col">
+
+                <!-- input form tab -->
+                <ul class="input-form nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="outgo-tab" data-toggle="tab" href="#outgo" role="tab" aria-controls="outgo" aria-selected="true">支出</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="income-tab" data-toggle="tab" href="#income" role="tab" aria-controls="income" aria-selected="false">収入</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+
+                    <!-- outgo -->
+                    <div class="input-form tab-pane fade show active" id="outgo" role="tabpanel" aria-labelledby="outgo-tab">
+                        <div class="form-group row">
+                            <label class="col-sm-1 col-form-label">日付</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-1 col-form-label">支出</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-1 col-form-label">MEMO</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- income -->
+                    <div class="tab-pane fade" id="income" role="tabpanel" aria-labelledby="income-tab">
+                        <div class="form-group row">
+                            <label class="col-sm-1 col-form-label">日付</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-1 col-form-label">収入</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-1 col-form-label">MEMO</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
 
 </body>
 </html>

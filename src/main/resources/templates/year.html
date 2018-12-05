@@ -2,12 +2,83 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <title>KakeiboApp</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css" />
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/css/custom.css" />
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.js"></script>
 </head>
 <body>
+<!-- header -->
+<nav class="navbar navbar-dark" style="background-color: #34302c;">
+    <div class="container">
+        <a class="navbar-brand"><h2 class="logo">KakeiboApp</h2></a>
+        <div class="account">
+            <ul>
+                <li class="account-link"><img src="../static/img/user.ico" width="60%"></li>
+                <li class="account-link"><span>ユーザー さん</span></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+
+        <!-- left side bar -->
+        <div class="col sidebar">
+            <ul class="nav flex-column nav-pills">
+                <li class="nav-item"><a class="nav-link" href="../templates/new.html">入力</a></li>
+                <li class="nav-item"><a class="nav-link" href="../templates/month.html">月別一覧</a></li>
+                <li class="nav-item"><a class="nav-link active" href="../templates/year.html">年間一覧</a></li>
+                <li class="nav-item"><a class="nav-link" href="../templates/setting.html">設定</a></li>
+            </ul>
+        </div>
+
+        <!-- Main contents -->
+        <div class="col">
+
+            <div class="year-header">
+                <ul>
+                    <li><button class="btn btn-outline-secondary">前の年</button></li>
+                    <li><h2>2018年</h2></li>
+                    <li><button class="btn btn-outline-secondary">次の年</button></li>
+                </ul>
+                <ul>
+                    <li>総収入：¥3,500,000</li>
+                    <li>総支出：¥3,000,000</li>
+                    <li>年間合計： ¥500,000</li>
+                </ul>
+            </div>
+
+            <!-- monthly list -->
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">収入</th>
+                    <th scope="col">支出</th>
+                    <th scope="col">合計</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>2018年1月</th>
+                    <td>¥250,000</td>
+                    <td>¥190,000</td>
+                    <td>¥60,000</td>
+                    <td>
+                        <button class="btn btn-outline-secondary">一覧</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
 
 </body>
 </html>

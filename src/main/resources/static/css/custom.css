@@ -1,0 +1,82 @@
+/* header and left-side-bar */
+.navbar-content{
+    max-width: 1024px;
+    margin 0 auto;
+}
+.logo{
+    color: #fff;
+}
+.account{
+    padding-top: 5px;
+}
+.account ul li{
+    display: inline-block;
+}
+.account :hover{
+    cursor: pointer;
+}
+.account-link{
+    color: #fff;
+}
+.account-link span{
+    font-size: 16px;
+}
+
+/* Main contents */
+.col{
+    padding: 15px 25px;
+}
+.btn .btn-outline-secondary .edit{
+    font-size: 14px;
+}
+
+/* new.html */
+
+@media (min-width: 576px)
+.sidebar {
+    padding: 1.5rem;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.sidebar {
+    max-width: 200px;
+    position: relative;
+    padding: 1rem;
+    margin: 1rem -15px 0;
+
+}
+
+.input-form{
+    padding-top: 30px;
+}
+.nav-pills .nav-link active{
+    background-color: #58bb42;
+}
+
+/* month.html */
+.month-header{
+    padding: 20px 10px;
+    text-align: center;
+}
+.month-header ul li{
+    padding: 0 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.month-pagination{
+    margin: 0 auto;
+}
+
+/* year.html */
+.year-header{
+    padding: 20px 10px;
+    text-align: center;
+}
+.year-header ul li{
+    padding: 0 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
