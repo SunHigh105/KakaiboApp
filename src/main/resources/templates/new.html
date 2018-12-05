@@ -6,8 +6,10 @@
     <link rel="stylesheet" href="../static/css/bootstrap.css" />
     <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../static/css/custom.css" />
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../static/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script type="text/javascript" src="../static/js/custom.js"></script>
 </head>
 <body>
     <!-- header -->
@@ -22,18 +24,19 @@
             </div>
         </div>
     </nav>
+
     <div class="container">
         <div class="row">
 
-            <!-- left side bar -->
-            <div class="col sidebar">
-                <ul class="nav flex-column nav-pills">
-                    <li class="nav-item"><a class="nav-link active" href="../templates/new.html">入力</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../templates/month.html">月別一覧</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../templates/year.html">年間一覧</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../templates/setting.html">設定</a></li>
-                </ul>
-            </div>
+<!-- left side bar -->
+<div class="col sidebar">
+    <ul class="nav flex-column nav-pills">
+        <li class="nav-item"><a class="nav-link active" href="../templates/new.html">入力</a></li>
+        <li class="nav-item"><a class="nav-link" href="../templates/month.html">月別一覧</a></li>
+        <li class="nav-item"><a class="nav-link" href="../templates/year.html">年間一覧</a></li>
+        <li class="nav-item"><a class="nav-link" href="../templates/setting.html">設定</a></li>
+    </ul>
+</div>
 
             <!-- Main contents -->
             <div class="col">
@@ -53,45 +56,69 @@
                     <!-- outgo -->
                     <div class="input-form tab-pane fade show active" id="outgo" role="tabpanel" aria-labelledby="outgo-tab">
                         <div class="form-group row">
-                            <label class="col-sm-1 col-form-label">日付</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-2 col-form-label">日付</label>
+                            <div class="col-sm-6">
                                 <input type="date" class="form-control">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-1 col-form-label">支出</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-2 col-form-label">支出</label>
+                            <div class="col-sm-6">
                                 <input type="number" class="form-control">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-1 col-form-label">MEMO</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-2 col-form-label">カテゴリ</label>
+                            <div class="col-sm-6">
+                                <select class="custom-select">
+                                    <option selected disabled>選択して下さい</option>
+                                    <option value="1">食費</option>
+                                    <option value="2">日用品</option>
+                                    <option value="3">交通費</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">MEMO</label>
+                            <div class="col-sm-6">
                                 <input type="text" class="form-control">
                             </div>
                         </div>
+                        <button class="btn btn-primary">入力する</button>
                     </div>
 
                     <!-- income -->
-                    <div class="tab-pane fade" id="income" role="tabpanel" aria-labelledby="income-tab">
+                    <div class="input-form　tab-pane fade" id="income" role="tabpanel" aria-labelledby="income-tab">
                         <div class="form-group row">
-                            <label class="col-sm-1 col-form-label">日付</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-2 col-form-label">日付</label>
+                            <div class="col-sm-6">
                                 <input type="date" class="form-control">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-1 col-form-label">収入</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-2 col-form-label">収入</label>
+                            <div class="col-sm-6">
                                 <input type="number" class="form-control">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-1 col-form-label">MEMO</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-2 col-form-label">カテゴリ</label>
+                            <div class="col-sm-6">
+                                <select class="custom-select">
+                                    <option selected disabled>選択して下さい</option>
+                                    <option value="1">給与</option>
+                                    <option value="2">お小遣い</option>
+                                    <option value="3">ボーナス</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">MEMO</label>
+                            <div class="col-sm-6">
                                 <input type="text" class="form-control">
                             </div>
                         </div>
+                        <button class="btn btn-primary">入力する</button>
                     </div>
 
                 </div>

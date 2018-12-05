@@ -1,4 +1,4 @@
-/* header and left-side-bar */
+/* header */
 .navbar-content{
     max-width: 1024px;
     margin 0 auto;
@@ -21,6 +21,22 @@
 .account-link span{
     font-size: 16px;
 }
+
+/* left-side-bar */
+.nav-item{
+    border-color: #58bb42;
+}
+.nav-link{
+    color: #58bb42;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #58bb42;
+}
+
+
 
 /* Main contents */
 .col{
