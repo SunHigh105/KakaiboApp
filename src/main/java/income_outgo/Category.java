@@ -1,4 +1,4 @@
-package category;
+package income_outgo;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
