@@ -1,4 +1,4 @@
-package income_outgo;
+package category;
 
 public class CategoryController {
 }

@@ -10,10 +10,11 @@ public class IncomeOutgo {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
-
-    private String name;
-
-    private String email;
+    private Integer cost;
+    private String date;
+    private String memo;
+    private String type;
+    private Integer category_id;
 
     public Integer getId() {
         return id;
@@ -23,21 +24,44 @@ public class IncomeOutgo {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Integer getCost() {
+        return cost;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCost(Integer cost) {
+        this.cost = cost;
     }
 
-    public String getEmail() {
-        return email;
+    public String getDate() {
+        return date;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setDate(String date) {
+        this.date = date;
+
     }
 
+    public String getMemo() {
+        return memo;
+    }
 
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Integer getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(Integer category_id) {
+        this.category_id = category_id;
+    }
 }
