@@ -14,8 +14,15 @@ public class IncomeOutgoService {
         return incomeOutgoRepository.findAll();
     }
 
+//    public List<IncomeOutgo> findByMonth(String month){
+//        return incomeOutgoRepository.findByMonth(month);
+//    }
+
 //    public IncomeOutgo findOne(Integer id){
 //        return incomeOutgoRepository.findOne(id);
+//    }
+//    public List<IncomeOutgo> findByMonth(Date start, Date end){
+//        return incomeOutgoRepository.findByStartDateBetween(start, end);
 //    }
 //
     public IncomeOutgo save(IncomeOutgo incomeOutgo){

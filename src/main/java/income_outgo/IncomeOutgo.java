@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Date;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class IncomeOutgo {
@@ -11,7 +12,7 @@ public class IncomeOutgo {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
     private Integer cost;
-    private String date;
+    private Date date;
     private String memo;
     private String type;
     private Integer category_id;
@@ -32,13 +33,12 @@ public class IncomeOutgo {
         this.cost = cost;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
     public void setDate(String date) {
-        this.date = date;
-
+        this.date = Date.valueOf(date);
     }
 
     public String getMemo() {
@@ -64,4 +64,6 @@ public class IncomeOutgo {
     public void setCategory_id(Integer category_id) {
         this.category_id = category_id;
     }
+
+
 }

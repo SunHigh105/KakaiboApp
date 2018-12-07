@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -20,8 +22,19 @@ public class IncomeOutgoController {
 
     @GetMapping("month")
     public String month(Model model){
-        List<IncomeOutgo> month = incomeOutgoService.findAll();
-        model.addAttribute("/", month);
+        Date today = new Date();
+//      // 見出しの年月表示
+        SimpleDateFormat thisMonthFormat = new SimpleDateFormat("yyyy年MM月");
+        String thisMonth = thisMonthFormat.format(today);
+        model.addAttribute("thisMonth", thisMonth);
+
+        // URLの年月表示
+        SimpleDateFormat thisMonthPathFormat = new SimpleDateFormat("yyyy-MM");
+        String thisMonthPath = thisMonthPathFormat.format(today);
+
+        // 月別一覧表示
+        List<IncomeOutgo> monthList = incomeOutgoService.findAll();
+        model.addAttribute("monthList", monthList);
         return "/month";
     }
 
