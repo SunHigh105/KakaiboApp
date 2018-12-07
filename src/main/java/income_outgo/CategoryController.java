@@ -16,9 +16,9 @@ public class CategoryController {
     @GetMapping
     public String newcCategory(Model model){
         List<Category> categories_outgo = categoryService.findByType("outgo");
-        model.addAttribute("/setting", categories_outgo);
-//        List<Category> categories_income = categoryService.findByType("income");
-//        model.addAttribute("/setting", categories_income);
+        model.addAttribute("categories_outgo", categories_outgo);
+        List<Category> categories_income = categoryService.findByType("income");
+        model.addAttribute("categories_income", categories_income);
         return "/setting";
     }
 
