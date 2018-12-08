@@ -21,6 +21,11 @@ public class CategoryController {
         model.addAttribute("categories_income", categories_income);
         return "/setting";
     }
+//    @GetMapping("/{id}/edit")
+//    public String edit(@PathVariable Integer id, Model model){
+//
+//    }
+
 
     @PostMapping
     public String create(@ModelAttribute Category category){
@@ -29,9 +34,15 @@ public class CategoryController {
     }
 
     @PutMapping("{id}")
-    public String update(@PathVariable Integer id, @ModelAttribute Category category){
+    public String update(@PathVariable Long id, @ModelAttribute Category category){
         category.setId(id);
         categoryService.save(category);
+        return "redirect:/setting";
+    }
+
+    @DeleteMapping("{id}")
+    public String destroy(@PathVariable Long id){
+        categoryService.deleteById(id);
         return "redirect:/setting";
     }
 }

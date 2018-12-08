@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -17,7 +18,7 @@ public class IncomeOutgoController {
 
     @GetMapping("new")
     public String newIncomeOutgo(Model model){
-        return "/new";
+        return "new";
     }
 
     @GetMapping("month")
@@ -35,7 +36,14 @@ public class IncomeOutgoController {
         // 月別一覧表示
         List<IncomeOutgo> monthList = incomeOutgoService.findAll();
         model.addAttribute("monthList", monthList);
-        return "/month";
+        return "month";
+    }
+
+    @GetMapping("{id}/edit")
+    public String edit(@PathVariable Long id, Model model){
+        Optional<IncomeOutgo> incomeOutgo = incomeOutgoService.findById(id);
+        model.addAttribute("incomeOutgo", incomeOutgo);
+        return "edit";
     }
 
     @PostMapping("new")
@@ -44,12 +52,18 @@ public class IncomeOutgoController {
         return "redirect:/new";
     }
 
+
     @PutMapping("{id}")
-    public String update(@PathVariable Integer id, @ModelAttribute IncomeOutgo incomeOutgo){
+    public String update(@PathVariable Long id, @ModelAttribute IncomeOutgo incomeOutgo){
         incomeOutgo.setId(id);
         incomeOutgoService.save(incomeOutgo);
-        return "redirect:/new";
+        return "redirect:/month";
     }
 
+    @DeleteMapping("{id}")
+    public String destroy(@PathVariable  Long id){
+        incomeOutgoService.deleteById(id);
+        return "redirect:/month";
+    }
 
 }

@@ -10,26 +10,26 @@ import java.sql.Date;
 public class IncomeOutgo {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
-    private Integer cost;
+    private Long id;
+    private Long cost;
     private Date date;
     private String memo;
     private String type;
-    private Integer category_id;
+    private Long category_id;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getCost() {
+    public Long getCost() {
         return cost;
     }
 
-    public void setCost(Integer cost) {
+    public void setCost(Long cost) {
         this.cost = cost;
     }
 
@@ -57,11 +57,11 @@ public class IncomeOutgo {
         this.type = type;
     }
 
-    public Integer getCategory_id() {
+    public Long getCategory_id() {
         return category_id;
     }
 
-    public void setCategory_id(Integer category_id) {
+    public void setCategory_id(Long category_id) {
         this.category_id = category_id;
     }
 

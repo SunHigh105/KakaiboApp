@@ -69,9 +69,13 @@
                 <tr th:each="category:${categories_outgo}" th:object="${category}">
                     <td th:text="*{name}"></td>
                     <td>橙</td>
-                    <td>
+                    <td class="setting-button">
                         <button class="btn btn-outline-secondary edit">編集</button>
-                        <button class="btn btn-outline-secondary delete">削除</button>
+                    </td>
+                    <td class="setting-button">
+                        <form th:action="@{/{id}/(id=*{id})}" th:method="delete">
+                            <input class="btn btn-outline-secondary" type="submit" value="削除" />
+                        </form>
                     </td>
                 </tr>
                 </tbody>
@@ -105,9 +109,13 @@
                 <tr th:each="category:${categories_income}" th:object="${category}">
                     <td th:text="*{name}"></td>
                     <td>橙</td>
-                    <td>
+                    <td class="setting-button">
                         <button class="btn btn-outline-secondary edit">編集</button>
-                        <button class="btn btn-outline-secondary delete">削除</button>
+                    </td>
+                    <td class="setting-button">
+                        <form th:action="@{/{id}/(id=*{id})}" th:method="delete">
+                            <input class="btn btn-outline-secondary" type="submit" value="削除" />
+                        </form>
                     </td>
                 </tr>
                 </tbody>

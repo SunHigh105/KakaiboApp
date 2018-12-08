@@ -41,7 +41,7 @@
             <div class="month-header">
                 <ul>
                     <li><button class="btn btn-outline-secondary">前の月</button></li>
-                    <li><h2>2018年12月</h2></li>
+                    <li><h2 th:text="${thisMonth}"></h2></li>
                     <li><button class="btn btn-outline-secondary">次の月</button></li>
                 </ul>
             </div>
@@ -58,24 +58,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th>2018/12/05</th>
-                    <td>支出</td>
-                    <td>食費</td>
-                    <td>¥1,000</td>
+                <tr th:each="month:${monthList}" th:object="${month}">
+                    <th th:text="*{date}"></th>
+                    <td th:text="*{type}"></td>
+                    <td th:text="*{category_id}"></td>
+                    <td th:text="*{cost}"></td>
                     <td>
-                        <button class="btn btn-outline-secondary">編集</button>
-                        <button class="btn btn-outline-secondary">削除</button>
+                        <a class="btn btn-outline-secondary" th:href="@{/{id}/edit(id=*{id})}">編集</a>
                     </td>
-                </tr>
-                <tr>
-                    <th>2018/12/05</th>
-                    <td>支出</td>
-                    <td>医療費</td>
-                    <td>¥3,000</td>
                     <td>
-                        <button class="btn btn-outline-secondary">編集</button>
-                        <button class="btn btn-outline-secondary">削除</button>
+                        <form th:action="@{/{id}/(id=*{id})}" th:method="delete">
+                            <input class="btn btn-outline-secondary" type="submit" value="削除" />
+                        </form>
                     </td>
                 </tr>
                 </tbody>
