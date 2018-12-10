@@ -14,9 +14,9 @@ public class IncomeOutgoService {
         return incomeOutgoRepository.findAll();
     }
 
-//    public List<IncomeOutgo> findByMonth(String month){
-//        return incomeOutgoRepository.findByMonth(month);
-//    }
+    public List<IncomeOutgo> findByMonth(String month){
+        return incomeOutgoRepository.findByMonth(month);
+    }
 
     public IncomeOutgo findById(Long id){
 //        return incomeOutgoRepository.findById(id).orElse(null);

@@ -43,7 +43,7 @@ public class IncomeOutgoController {
         String thisMonthPath = thisMonthPathFormat.format(today);
 
         // 月別一覧表示
-        List<IncomeOutgo> monthList = incomeOutgoService.findAll();
+        List<IncomeOutgo> monthList = incomeOutgoService.findByMonth(thisMonthPath);
         model.addAttribute("monthList", monthList);
         return "income_outgo/month";
     }
