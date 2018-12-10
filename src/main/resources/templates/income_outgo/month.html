@@ -66,7 +66,11 @@
                         <td th:case="'outgo'">支出</td>
                         <td th:case="'income'">収入</td>
                     </div>
-                    <td th:text="*{category_id}"></td>
+                    <div th:each="category:${categories}">
+                        <div th:switch="${category.id}">
+                            <td th:case="*{category_id}" th:text="${category.name}"></td>
+                        </div>
+                    </div>
                     <td th:text="*{memo}"></td>
                     <td th:text="*{cost}"></td>
                     <td>

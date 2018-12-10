@@ -36,6 +36,7 @@ public class IncomeOutgoController {
 
         // カテゴリ名表示のため、カテゴリ一覧を取得
         List<Category> categories = categoryService.findAll();
+        model.addAttribute("categories", categories);
 
         // URLの年月表示
         SimpleDateFormat thisMonthPathFormat = new SimpleDateFormat("yyyy-MM");
