@@ -14,9 +14,15 @@ import java.util.List;
 public class IncomeOutgoController {
     @Autowired
     private IncomeOutgoService incomeOutgoService;
+    @Autowired
+    private CategoryService categoryService;
 
     @GetMapping("new")
     public String newIncomeOutgo(Model model){
+        List<Category> categories_outgo = categoryService.findByType("outgo");
+        model.addAttribute("categories_outgo", categories_outgo);
+        List<Category> categories_income = categoryService.findByType("income");
+        model.addAttribute("categories_income", categories_income);
         return "income_outgo/new";
     }
 
@@ -27,6 +33,9 @@ public class IncomeOutgoController {
         SimpleDateFormat thisMonthFormat = new SimpleDateFormat("yyyy年MM月");
         String thisMonth = thisMonthFormat.format(today);
         model.addAttribute("thisMonth", thisMonth);
+
+        // カテゴリ名表示のため、カテゴリ一覧を取得
+        List<Category> categories = categoryService.findAll();
 
         // URLの年月表示
         SimpleDateFormat thisMonthPathFormat = new SimpleDateFormat("yyyy-MM");

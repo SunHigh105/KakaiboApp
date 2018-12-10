@@ -73,10 +73,10 @@
                                 <label class="col-sm-2 col-form-label">カテゴリ</label>
                                 <div class="col-sm-6">
                                     <select class="custom-select" name="category_id">
-                                        <option selected disabled>選択して下さい</option>
-                                        <option value="1">食費</option>
-                                        <option value="2">日用品</option>
-                                        <option value="3">交通費</option>
+                                        <option selected disable>選択して下さい</option>
+                                        <div th:each="category:${categories_outgo}" th:object="${category}">
+                                            <option th:value="*{id}" th:text="*{name}"></option>
+                                        </div>
                                     </select>
                                 </div>
                             </div>
@@ -114,9 +114,9 @@
                                 <div class="col-sm-6">
                                     <select class="custom-select" name="category_id">
                                         <option selected disabled>選択して下さい</option>
-                                        <option value="1">給与</option>
-                                        <option value="2">お小遣い</option>
-                                        <option value="3">ボーナス</option>
+                                        <div th:each="category:${categories_income}" th:object="${category}">
+                                            <option th:value="*{id}" th:text="*{name}"></option>
+                                        </div>
                                     </select>
                                 </div>
                             </div>

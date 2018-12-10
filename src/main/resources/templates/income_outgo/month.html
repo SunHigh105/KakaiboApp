@@ -53,15 +53,21 @@
                     <th scope="col">登録日</th>
                     <th scope="col">収入/支出</th>
                     <th scope="col">カテゴリ</th>
+                    <th scope="col">MEMO</th>
                     <th scope="col">金額</th>
+                    <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="month:${monthList}" th:object="${month}">
                     <th th:text="*{date}"></th>
-                    <td th:text="*{type}"></td>
+                    <div th:switch="*{type}">
+                        <td th:case="'outgo'">支出</td>
+                        <td th:case="'income'">収入</td>
+                    </div>
                     <td th:text="*{category_id}"></td>
+                    <td th:text="*{memo}"></td>
                     <td th:text="*{cost}"></td>
                     <td>
                         <a class="btn btn-outline-secondary" th:href="@{/income_outgo/{id}/edit(id=*{id})}">編集</a>
