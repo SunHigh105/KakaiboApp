@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service //
 public class IncomeOutgoService {
@@ -19,9 +18,9 @@ public class IncomeOutgoService {
 //        return incomeOutgoRepository.findByMonth(month);
 //    }
 
-    public Optional<IncomeOutgo> findById(Long id){
+    public IncomeOutgo findById(Long id){
 //        return incomeOutgoRepository.findById(id).orElse(null);
-        return incomeOutgoRepository.findById(id);
+        return incomeOutgoRepository.findById(id).orElse(null);
     }
 //    public List<IncomeOutgo> findByMonth(Date start, Date end){
 //        return incomeOutgoRepository.findByStartDateBetween(start, end);

@@ -28,10 +28,10 @@
         <!-- left side bar -->
         <div class="col sidebar">
             <ul class="nav flex-column nav-pills">
-                <li class="nav-item"><a class="nav-link" href="/new">入力</a></li>
-                <li class="nav-item"><a class="nav-link active" href="/month">月別一覧</a></li>
-                <li class="nav-item"><a class="nav-link" href="/year">年間一覧</a></li>
-                <li class="nav-item"><a class="nav-link" href="/setting">設定</a></li>
+                <li class="nav-item"><a class="nav-link" href="/income_outgo/new">入力</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/income_outgo/month">月別一覧</a></li>
+                <li class="nav-item"><a class="nav-link" href="/income_outgo/year">年間一覧</a></li>
+                <li class="nav-item"><a class="nav-link" href="/category/setting">設定</a></li>
             </ul>
         </div>
 
@@ -64,10 +64,10 @@
                     <td th:text="*{category_id}"></td>
                     <td th:text="*{cost}"></td>
                     <td>
-                        <a class="btn btn-outline-secondary" th:href="@{/{id}/edit(id=*{id})}">編集</a>
+                        <a class="btn btn-outline-secondary" th:href="@{/income_outgo/{id}/edit(id=*{id})}">編集</a>
                     </td>
                     <td>
-                        <form th:action="@{/{id}/(id=*{id})}" th:method="delete">
+                        <form th:action="@{/income_outgo/{id}/(id=*{id})}" th:method="delete">
                             <input class="btn btn-outline-secondary" type="submit" value="削除" />
                         </form>
                     </td>

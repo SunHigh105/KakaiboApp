@@ -8,17 +8,16 @@ import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/income_outgo")
 public class IncomeOutgoController {
     @Autowired
     private IncomeOutgoService incomeOutgoService;
 
     @GetMapping("new")
     public String newIncomeOutgo(Model model){
-        return "new";
+        return "income_outgo/new";
     }
 
     @GetMapping("month")
@@ -36,20 +35,20 @@ public class IncomeOutgoController {
         // 月別一覧表示
         List<IncomeOutgo> monthList = incomeOutgoService.findAll();
         model.addAttribute("monthList", monthList);
-        return "month";
+        return "income_outgo/month";
     }
 
     @GetMapping("{id}/edit")
     public String edit(@PathVariable Long id, Model model){
-        Optional<IncomeOutgo> incomeOutgo = incomeOutgoService.findById(id);
+        IncomeOutgo incomeOutgo = incomeOutgoService.findById(id);
         model.addAttribute("incomeOutgo", incomeOutgo);
-        return "edit";
+        return "income_outgo/edit";
     }
 
     @PostMapping("new")
     public String create(@ModelAttribute IncomeOutgo incomeOutgo){
         incomeOutgoService.save(incomeOutgo);
-        return "redirect:/new";
+        return "redirect:/income_outgo/new";
     }
 
 
@@ -57,13 +56,13 @@ public class IncomeOutgoController {
     public String update(@PathVariable Long id, @ModelAttribute IncomeOutgo incomeOutgo){
         incomeOutgo.setId(id);
         incomeOutgoService.save(incomeOutgo);
-        return "redirect:/month";
+        return "redirect:/income_outgo/month";
     }
 
     @DeleteMapping("{id}")
     public String destroy(@PathVariable  Long id){
         incomeOutgoService.deleteById(id);
-        return "redirect:/month";
+        return "redirect:/income_outgo/month";
     }
 
 }

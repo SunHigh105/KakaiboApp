@@ -18,9 +18,9 @@ public class CategoryService {
         return categoryRepository.findByType(type);
     }
 
-//    public Category findOne(Integer id){
-//        return categoryRepository.findOne(id);
-//    }
+    public  Category findById(Long id){
+        return categoryRepository.findById(id).orElse(null);
+    }
 
     public Category save(Category category){
         return categoryRepository.save(category);
