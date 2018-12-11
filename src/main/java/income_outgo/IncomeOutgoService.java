@@ -25,6 +25,28 @@ public class IncomeOutgoService {
         return incomeOutgoRepository.findByMonth(startDate, lastDate);
     }
 
+    //前月のパスを取得
+    public Date prevMonth(Date today){
+        Calendar firstDay = createFirstDay(today);
+        firstDay.add(Calendar.MONTH, -1);
+        Date prevMonth = firstDay.getTime();
+        return prevMonth;
+    }
+
+    //次月のパス
+    public Date nextMonth(Date today){
+        Calendar firstDay = createFirstDay(today);
+        firstDay.add(Calendar.MONTH, 1);
+        Date nextMonth = firstDay.getTime();
+        return nextMonth;
+    }
+
+    //年間の一覧を取得
+
+    //前年の一覧を取得
+
+    //翌年の一覧を取得
+
     public IncomeOutgo findById(Long id){
 //        return incomeOutgoRepository.findById(id).orElse(null);
         return incomeOutgoRepository.findById(id).orElse(null);

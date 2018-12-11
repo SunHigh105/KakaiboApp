@@ -32,7 +32,7 @@
 <div class="col sidebar">
     <ul class="nav flex-column nav-pills">
         <li class="nav-item"><a class="nav-link active" href="/income_outgo/new">入力</a></li>
-        <li class="nav-item"><a class="nav-link" href="/income_outgo/month">月別一覧</a></li>
+        <li class="nav-item"><a class="nav-link" href="/income_outgo/month" th:href="@{/income_outgo/month/{thisMonthPath}(thisMonthPath=${thisMonthPath})}">月別一覧</a></li>
         <li class="nav-item"><a class="nav-link" href="/income_outgo/year">年間一覧</a></li>
         <li class="nav-item"><a class="nav-link" href="/category/setting">設定</a></li>
     </ul>
@@ -96,7 +96,7 @@
                     <!-- income -->
                     <div class="input-form" id="income" role="tabpanel" aria-labelledby="income-tab">
                         <h4>【収入】</h4>
-                        <form th:action="@{/income_outgo/new}" th:method="post">
+                        <form th:action="@{/income_outgo/new}">
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">日付</label>
                                 <div class="col-sm-6">
@@ -112,7 +112,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">カテゴリ</label>
                                 <div class="col-sm-6">
-                                    <select class="custom-select" name="category_id">
+                                    <select class="custom-select" name="category_id" th:method="post">
                                         <option selected disabled>選択して下さい</option>
                                         <div th:each="category:${categories_income}" th:object="${category}">
                                             <option th:value="*{id}" th:text="*{name}"></option>

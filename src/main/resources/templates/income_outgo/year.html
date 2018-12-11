@@ -29,7 +29,7 @@
         <div class="col sidebar">
             <ul class="nav flex-column nav-pills">
                 <li class="nav-item"><a class="nav-link" href="/income_outgo/new.html">入力</a></li>
-                <li class="nav-item"><a class="nav-link" href="/income_outgo/month.html">月別一覧</a></li>
+                <li class="nav-item"><a class="nav-link" href="/income_outgo/month.html" th:href="@{/income_outgo/month/{thisMonthPath}(thisMonthPath=${thisMonthPath})}">月別一覧</a></li>
                 <li class="nav-item"><a class="nav-link active" href="/income_outgo/year.html">年間一覧</a></li>
                 <li class="nav-item"><a class="nav-link" href="/category/setting.html">設定</a></li>
             </ul>
