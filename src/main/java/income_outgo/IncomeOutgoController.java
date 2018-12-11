@@ -43,14 +43,8 @@ public class IncomeOutgoController {
         SimpleDateFormat thisMonthPathFormat = new SimpleDateFormat("yyyy-MM");
         String thisMonthPath = thisMonthPathFormat.format(today);
 
-        //月の開始日と終了日を取得
-        SimpleDateFormat thisMonthDate = new SimpleDateFormat("yyyy-MM-dd");
-        String strStartDate = thisMonthPath + "-01";
-        String strLastDate = thisMonthPath + "-31";
-        Date startDate = thisMonthDate.parse(strStartDate);
-        Date lastDate = thisMonthDate.parse(strLastDate);
         // 月別一覧表示
-        List<IncomeOutgo> monthList = incomeOutgoService.findByMonth(startDate, lastDate);
+        List<IncomeOutgo> monthList = incomeOutgoService.findByMonth(today);
         model.addAttribute("monthList", monthList);
         return "income_outgo/month";
     }

@@ -10,7 +10,6 @@ import java.util.List;
 
 @Repository
 public interface IncomeOutgoRepository extends JpaRepository<IncomeOutgo, Long> {
-    @Query("SELECT i FROM IncomeOutgo i WHERE i.date >= :startDate AND i.date <= :lastDate")
+    @Query("SELECT i FROM IncomeOutgo i WHERE i.date >= :startDate AND i.date < :lastDate")
     List<IncomeOutgo> findByMonth(@Param("startDate") Date startDate, @Param("lastDate") Date lastDate);
-
 }
