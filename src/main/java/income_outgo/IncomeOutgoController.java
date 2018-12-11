@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +28,7 @@ public class IncomeOutgoController {
     }
 
     @GetMapping("month")
-    public String month(Model model){
+    public String month(Model model) throws ParseException {
         Date today = new Date();
 //      // 見出しの年月表示
         SimpleDateFormat thisMonthFormat = new SimpleDateFormat("yyyy年MM月");
@@ -42,8 +43,14 @@ public class IncomeOutgoController {
         SimpleDateFormat thisMonthPathFormat = new SimpleDateFormat("yyyy-MM");
         String thisMonthPath = thisMonthPathFormat.format(today);
 
+        //月の開始日と終了日を取得
+        SimpleDateFormat thisMonthDate = new SimpleDateFormat("yyyy-MM-dd");
+        String strStartDate = thisMonthPath + "-01";
+        String strLastDate = thisMonthPath + "-31";
+        Date startDate = thisMonthDate.parse(strStartDate);
+        Date lastDate = thisMonthDate.parse(strLastDate);
         // 月別一覧表示
-        List<IncomeOutgo> monthList = incomeOutgoService.findAll();
+        List<IncomeOutgo> monthList = incomeOutgoService.findByMonth(startDate, lastDate);
         model.addAttribute("monthList", monthList);
         return "income_outgo/month";
     }

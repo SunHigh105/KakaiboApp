@@ -3,6 +3,7 @@ package income_outgo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service //
@@ -14,9 +15,9 @@ public class IncomeOutgoService {
         return incomeOutgoRepository.findAll();
     }
 
-//    public List<IncomeOutgo> findByMonth(String month){
-//        return incomeOutgoRepository.findByMonth(month);
-//    }
+    public List<IncomeOutgo> findByMonth(Date startDate, Date lastDate){
+        return incomeOutgoRepository.findByMonth(startDate, lastDate);
+    }
 
     public IncomeOutgo findById(Long id){
 //        return incomeOutgoRepository.findById(id).orElse(null);

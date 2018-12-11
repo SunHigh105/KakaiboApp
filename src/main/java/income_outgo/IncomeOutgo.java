@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class IncomeOutgo {
@@ -34,9 +33,10 @@ public class IncomeOutgo {
         this.cost = cost;
     }
 
-    public String getDate() {
-       SimpleDateFormat StringDate = new SimpleDateFormat("yyyy-MM-dd");
-       return StringDate.format(date);
+    public java.util.Date getDate() {
+//       SimpleDateFormat StringDate = new SimpleDateFormat("yyyy-MM-dd");
+//       return StringDate.format(date);Date;
+        return date;
     }
 
     public void setDate(String date) {
