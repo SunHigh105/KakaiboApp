@@ -41,6 +41,30 @@ public class IncomeOutgoService {
         return nextMonth;
     }
 
+    //今年の1月1日
+    public Date startDateYear(Date today){
+        Calendar firstYear = createFirstYear(today);
+        return firstYear.getTime();
+    }
+
+    //翌年の1月1日
+    public Date lastDateYear(Date today){
+        Calendar firstYear = createFirstYear(today);
+        // 1年プラスしてからDate型に変換
+        firstYear.add(Calendar.YEAR, 1);
+        return firstYear.getTime();
+    }
+
+
+    // 年間の支出合計を取得
+    public Integer yearOutgoTotal(Date today){
+        return incomeOutgoRepository.costTotal("outgo", startDateYear(today), lastDateYear(today));
+    }
+    // 年間の収入合計を取得
+    public Integer yearIncomeTotal(Date today){
+        return incomeOutgoRepository.costTotal("income", startDateYear(today), lastDateYear(today));
+    }
+
     //年間の一覧を取得
     public List<IncomeOutgo> fincByYear(Date today){
         Calendar firstYear = createFirstYear(today);
@@ -48,15 +72,11 @@ public class IncomeOutgoService {
         // 1年プラスしてからDate型に変換
         firstYear.add(Calendar.YEAR, 1);
         Date lastYear = firstYear.getTime();
-        return incomeOutgoRepository.findByMonth(startYear, lastYear);
+        return incomeOutgoRepository.findByYear(startYear, lastYear);
     }
 
-    //前年の一覧を取得
-
-    //翌年の一覧を取得
 
     public IncomeOutgo findById(Long id){
-//        return incomeOutgoRepository.findById(id).orElse(null);
         return incomeOutgoRepository.findById(id).orElse(null);
     }
 

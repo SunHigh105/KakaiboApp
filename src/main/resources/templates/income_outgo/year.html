@@ -41,13 +41,13 @@
             <div class="year-header">
                 <ul>
                     <li><button class="btn btn-outline-secondary">前の年</button></li>
-                    <li><h2 th:text="${thisYearPath}"></h2></li>
+                    <li><h2><span th:text="${thisYearPath}"></span>年</h2></li>
                     <li><button class="btn btn-outline-secondary">次の年</button></li>
                 </ul>
                 <ul>
-                    <li>総収入：¥3,500,000</li>
-                    <li>総支出：¥3,000,000</li>
-                    <li>年間合計： ¥500,000</li>
+                    <li>総支出：<span th:text="${yearOutgoTotal}"></span></li>
+                    <li>総収入：<span th:text="${yearIncomeTotal}"></span></li>
+                    <li>年間合計：<span th:text="${yearTotal}"></span></li>
                 </ul>
             </div>
 

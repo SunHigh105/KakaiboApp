@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -17,15 +18,35 @@ public class IncomeOutgoController {
     @Autowired
     private CategoryService categoryService;
 
-    // 基準となる日
+    // 今日
     private Date today(){
         Date today = new Date();
         return today;
     }
 
+//    // 基準となる日
+//    private Date centerMonth(String monthPath) throws ParseException {
+//        //年のパターン
+//        Pattern yearPattern = Pattern.compile("¥d¥d¥d¥d");
+//        Matcher yearMatcher = yearPattern.matcher(monthPath);
+//        Integer year = parseInt(yearMatcher.group());
+//
+//        //月のパターン
+//        Pattern monthPattern = Pattern.compile("¥d{2}$");
+//        Matcher monthMatcher = monthPattern.matcher(monthPath);
+//        Integer month = parseInt(monthMatcher.group());
+//
+//        //基準日を作る
+//        Calendar cal = Calendar.getInstance();
+//        cal.set(Calendar.YEAR, year-1);
+//        cal.set(Calendar.MONTH, month-1);
+//        cal.set(Calendar.DAY_OF_MONTH, 1);
+//
+//        return cal.getTime();
+//    }
+
     // 今月（yyyy-MM）の文字列
     private String thisMonthPath(){
-
         SimpleDateFormat thisMonthPathFormat = new SimpleDateFormat("yyyy-MM");
         return thisMonthPathFormat.format(today());
     }
@@ -54,13 +75,11 @@ public class IncomeOutgoController {
     }
 
     @GetMapping("month/{thisMonthPath}")
-    public String month(@PathVariable String thisMonthPath, Model model) {
-        Date today = new Date();
-
+    public String month(@PathVariable String thisMonthPath, Model model) throws ParseException {
 
         // 見出しの年月表示
         SimpleDateFormat thisMonthFormat = new SimpleDateFormat("yyyy年MM月");
-        String thisMonth = thisMonthFormat.format(today);
+        String thisMonth = thisMonthFormat.format(today());
         model.addAttribute("thisMonth", thisMonth);
 
         // カテゴリ名表示のため、カテゴリ一覧を取得
@@ -69,23 +88,21 @@ public class IncomeOutgoController {
 
         // 今月の一覧表示
         SimpleDateFormat thisMonthPathFormat = new SimpleDateFormat("yyyy-MM");
-//        Date today = thisMonthPathFormat.parse(thisMonthPath);
-
-        List<IncomeOutgo> monthList = incomeOutgoService.findByMonth(today);
+        List<IncomeOutgo> monthList = incomeOutgoService.findByMonth(today());
         model.addAttribute("monthList", monthList);
 
         // 前月の一覧のパス取得
-        Date prevMonth = incomeOutgoService.prevMonth(today);
+        Date prevMonth = incomeOutgoService.prevMonth(today());
         String prevMonthPath = thisMonthPathFormat.format(prevMonth);
         model.addAttribute("prevMonthPath", prevMonthPath);
 
         // 次月の一覧のパス取得
-        Date nextMonth = incomeOutgoService.nextMonth(today);
+        Date nextMonth = incomeOutgoService.nextMonth(today());
         String nextMonthPath = thisMonthPathFormat.format(nextMonth);
         model.addAttribute("nextMonthPath", nextMonthPath);
 
         //今月をリンクに入れる
-        model.addAttribute("thisMonthPath", thisMonthPath);
+        model.addAttribute("thisMonthPath", thisMonthPath());
 
         //今年(yyyyの文字列)
         model.addAttribute("thisYearPath", thisYearPath());
@@ -111,6 +128,18 @@ public class IncomeOutgoController {
 
     @GetMapping("year/{thisYearPath}")
     public String year(@PathVariable String thisYearPath, Model model){
+
+        //年間の支出合計
+        Integer yearOutgoTotal = incomeOutgoService.yearOutgoTotal(today());
+        model.addAttribute("yearOutgoTotal", yearOutgoTotal);
+
+        //年間の収入合計
+        Integer yearIncomeTotal = incomeOutgoService.yearIncomeTotal(today());
+        model.addAttribute("yearIncomeTotal", yearIncomeTotal);
+
+        //年間合計
+        Integer yearTotal = yearIncomeTotal - yearOutgoTotal;
+        model.addAttribute("yearTotal", yearTotal);
 
         model.addAttribute("thisYearPath", thisYearPath);
 
