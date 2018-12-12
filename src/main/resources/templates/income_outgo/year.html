@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>KakeiboApp</title>
-    <link rel="stylesheet" href="../static/css/bootstrap.css" />
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../static/css/custom.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.js"></script>
 </head>
@@ -16,7 +16,7 @@
         <a class="navbar-brand"><h2 class="logo">KakeiboApp</h2></a>
         <div class="account">
             <ul>
-                <li class="account-link"><img src="../static/img/user.ico" width="60%"></li>
+                <li class="account-link"><img src="/img/user.ico" width="60%"></li>
                 <li class="account-link"><span>ユーザー さん</span></li>
             </ul>
         </div>
@@ -28,10 +28,10 @@
         <!-- left side bar -->
         <div class="col sidebar">
             <ul class="nav flex-column nav-pills">
-                <li class="nav-item"><a class="nav-link" href="/income_outgo/new.html">入力</a></li>
-                <li class="nav-item"><a class="nav-link" href="/income_outgo/month.html" th:href="@{/income_outgo/month/{thisMonthPath}(thisMonthPath=${thisMonthPath})}">月別一覧</a></li>
-                <li class="nav-item"><a class="nav-link active" href="/income_outgo/year.html">年間一覧</a></li>
-                <li class="nav-item"><a class="nav-link" href="/category/setting.html">設定</a></li>
+                <li class="nav-item"><a class="nav-link" href="/income_outgo/new">入力</a></li>
+                <li class="nav-item"><a class="nav-link" href="/income_outgo/month" th:href="@{/income_outgo/month/{thisMonthPath}(thisMonthPath=${thisMonthPath})}">月別一覧</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/income_outgo/year" th:href="@{/income_outgo/year/{thisYearPath}(thisYearPath=${thisYearPath})}">年間一覧</a></li>
+                <li class="nav-item"><a class="nav-link" href="/category/setting">設定</a></li>
             </ul>
         </div>
 
@@ -41,7 +41,7 @@
             <div class="year-header">
                 <ul>
                     <li><button class="btn btn-outline-secondary">前の年</button></li>
-                    <li><h2>2018年</h2></li>
+                    <li><h2 th:text="${thisYearPath}"></h2></li>
                     <li><button class="btn btn-outline-secondary">次の年</button></li>
                 </ul>
                 <ul>

@@ -17,26 +17,50 @@ public class IncomeOutgoController {
     @Autowired
     private CategoryService categoryService;
 
+    // 基準となる日
+    private Date today(){
+        Date today = new Date();
+        return today;
+    }
+
+    // 今月（yyyy-MM）の文字列
+    private String thisMonthPath(){
+
+        SimpleDateFormat thisMonthPathFormat = new SimpleDateFormat("yyyy-MM");
+        return thisMonthPathFormat.format(today());
+    }
+
+    //今年(yyyyの文字列)
+    private String thisYearPath(){
+        SimpleDateFormat thisYearPathFormat = new SimpleDateFormat("yyyy");
+        return thisYearPathFormat.format(today());
+    }
+
+    // カテゴリのリスト
+    private List<Category> categories(String type){
+        return categoryService.findByType(type);
+    }
+
     @GetMapping("new")
     public String newIncomeOutgo(Model model){
-        List<Category> categories_outgo = categoryService.findByType("outgo");
-        model.addAttribute("categories_outgo", categories_outgo);
-        List<Category> categories_income = categoryService.findByType("income");
-        model.addAttribute("categories_income", categories_income);
-        // 今月（yyyy-MM）の文字列
-        Date today = new Date();
-        SimpleDateFormat thisMonthPathFormat = new SimpleDateFormat("yyyy-MM");
-        String thisMonthPath = thisMonthPathFormat.format(today);
+        // カテゴリを取得
+        model.addAttribute("categories_outgo", categories("outgo"));
+        model.addAttribute("categories_income", categories("income"));
         //今月をリンクに入れる
-        model.addAttribute("thisMonthPath", thisMonthPath);
+        model.addAttribute("thisMonthPath", thisMonthPath());
+        // 今年をリンクに入れる
+        model.addAttribute("thisYearPath", thisYearPath());
         return "income_outgo/new";
     }
 
     @GetMapping("month/{thisMonthPath}")
     public String month(@PathVariable String thisMonthPath, Model model) {
+        Date today = new Date();
+
+
         // 見出しの年月表示
         SimpleDateFormat thisMonthFormat = new SimpleDateFormat("yyyy年MM月");
-        String thisMonth = thisMonthFormat.format(thisMonthPath);
+        String thisMonth = thisMonthFormat.format(today);
         model.addAttribute("thisMonth", thisMonth);
 
         // カテゴリ名表示のため、カテゴリ一覧を取得
@@ -45,7 +69,7 @@ public class IncomeOutgoController {
 
         // 今月の一覧表示
         SimpleDateFormat thisMonthPathFormat = new SimpleDateFormat("yyyy-MM");
-        Date today = thisMonthPathFormat.parse(thisMonthPath);
+//        Date today = thisMonthPathFormat.parse(thisMonthPath);
 
         List<IncomeOutgo> monthList = incomeOutgoService.findByMonth(today);
         model.addAttribute("monthList", monthList);
@@ -63,6 +87,9 @@ public class IncomeOutgoController {
         //今月をリンクに入れる
         model.addAttribute("thisMonthPath", thisMonthPath);
 
+        //今年(yyyyの文字列)
+        model.addAttribute("thisYearPath", thisYearPath());
+
         return "income_outgo/month";
     }
 
@@ -70,14 +97,30 @@ public class IncomeOutgoController {
     public String edit(@PathVariable Long id, Model model){
         IncomeOutgo incomeOutgo = incomeOutgoService.findById(id);
         model.addAttribute("incomeOutgo", incomeOutgo);
-        // 今月（yyyy-MM）の文字列
-        Date today = new Date();
-        SimpleDateFormat thisMonthPathFormat = new SimpleDateFormat("yyyy-MM");
-        String thisMonthPath = thisMonthPathFormat.format(today);
+        // カテゴリ
+        model.addAttribute("categories_outgo", categories("outgo"));
+        model.addAttribute("categories_income", categories("income"));
+
         //今月をリンクに入れる
-        model.addAttribute("thisMonthPath", thisMonthPath);
+        model.addAttribute("thisMonthPath", thisMonthPath());
+
+        //今年をリンクに入れる
+        model.addAttribute("thisYearPath", thisYearPath());
         return "income_outgo/edit";
     }
+
+    @GetMapping("year/{thisYearPath}")
+    public String year(@PathVariable String thisYearPath, Model model){
+
+        model.addAttribute("thisYearPath", thisYearPath);
+
+        model.addAttribute("thisMonthPath", thisMonthPath());
+
+//        // 年間の一覧表示
+//        List<IncomeOutgo>
+        return "income_outgo/year";
+    }
+
 
     @PostMapping("new")
     public String create(@ModelAttribute IncomeOutgo incomeOutgo){

@@ -42,6 +42,14 @@ public class IncomeOutgoService {
     }
 
     //年間の一覧を取得
+    public List<IncomeOutgo> fincByYear(Date today){
+        Calendar firstYear = createFirstYear(today);
+        Date startYear = firstYear.getTime();
+        // 1年プラスしてからDate型に変換
+        firstYear.add(Calendar.YEAR, 1);
+        Date lastYear = firstYear.getTime();
+        return incomeOutgoRepository.findByMonth(startYear, lastYear);
+    }
 
     //前年の一覧を取得
 
@@ -55,11 +63,12 @@ public class IncomeOutgoService {
     public IncomeOutgo save(IncomeOutgo incomeOutgo){
         return incomeOutgoRepository.save(incomeOutgo);
     }
-//
+
     public void deleteById(Long id){
         incomeOutgoRepository.deleteById(id);
     }
 
+    // X月1日を取得
     private Calendar createFirstDay(Date date){
         Calendar cal = Calendar.getInstance();
         //引数dateをDate型→カレンダー型に変換
@@ -73,4 +82,22 @@ public class IncomeOutgoService {
         cal.clear(Calendar.MILLISECOND);
         return cal;
     }
+
+    // X年1月1日を取得
+    private Calendar createFirstYear(Date date){
+        Calendar cal = Calendar.getInstance();
+        //引数dateをDate型→カレンダー型に変換
+        cal.setTime(date);
+        //1月1日に再設定
+        cal.set(Calendar.MONTH, 0);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        //時間・分・秒・ミリ秒は削除
+        cal.clear(Calendar.HOUR_OF_DAY);
+        cal.clear(Calendar.MINUTE);
+        cal.clear(Calendar.SECOND);
+        cal.clear(Calendar.MILLISECOND);
+        return cal;
+    }
+
+
 }

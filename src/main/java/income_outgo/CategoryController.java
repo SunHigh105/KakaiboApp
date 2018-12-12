@@ -14,20 +14,40 @@ import java.util.List;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
+    private IncomeOutgoService incomeOutgoService;
+
+    // 基準となる日
+    private Date today(){
+        Date today = new Date();
+        return today;
+    }
 
     // 今月（yyyy-MM）の文字列
-    Date today = new Date();
-    SimpleDateFormat thisMonthFormat = new SimpleDateFormat("yyyy-MM");
-    String thisMonthPath = thisMonthFormat.format(today);
+    private String thisMonthPath(){
+
+        SimpleDateFormat thisMonthPathFormat = new SimpleDateFormat("yyyy-MM");
+        return thisMonthPathFormat.format(today());
+    }
+
+    //今年(yyyyの文字列)
+    private String thisYearPath(){
+        SimpleDateFormat thisYearPathFormat = new SimpleDateFormat("yyyy");
+        return thisYearPathFormat.format(today());
+    }
+
+    // カテゴリのリスト
+    private List<Category> categories(String type){
+        return categoryService.findByType(type);
+    }
 
     @GetMapping("setting")
     public String newcCategory(Model model){
-        List<Category> categories_outgo = categoryService.findByType("outgo");
-        model.addAttribute("categories_outgo", categories_outgo);
-        List<Category> categories_income = categoryService.findByType("income");
-        model.addAttribute("categories_income", categories_income);
+        model.addAttribute("categories_outgo", categories("outgo"));
+        model.addAttribute("categories_income", categories("income"));
         //今月をリンクに入れる
-        model.addAttribute("thisMonthPath", thisMonthPath);
+        model.addAttribute("thisMonthPath", thisMonthPath());
+        //今年をリンクに入れる
+        model.addAttribute("thisYearPath", thisYearPath());
         return "category/setting";
     }
     @GetMapping("/{id}/edit")
@@ -35,7 +55,9 @@ public class CategoryController {
         Category category = categoryService.findById(id);
         model.addAttribute("category", category);
         //今月をリンクに入れる
-        model.addAttribute("thisMonthPath", thisMonthPath);
+        model.addAttribute("thisMonthPath", thisMonthPath());
+        //今年をリンクに入れる
+        model.addAttribute("thisYearPath", thisYearPath());
         return "category/edit";
     }
 
