@@ -51,6 +51,22 @@ public class IncomeOutgoController {
 
         return cal.getTime();
     }
+    // 基準となる年
+    private Date centerYear(String yearPath){
+        //年のパターン
+        Pattern yearPattern = Pattern.compile("^[0-9]{4}");
+        Matcher yearMatcher = yearPattern.matcher(yearPath);
+        yearMatcher.find();
+        Integer year = parseInt(yearMatcher.group());
+
+        //基準日を作る
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, 0);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+
+        return cal.getTime();
+    }
 
     // 今月（yyyy-MM）の文字列
     private String thisMonthPath(){
@@ -137,11 +153,11 @@ public class IncomeOutgoController {
     public String year(@PathVariable String thisYearPath, Model model){
 
         //年間の支出合計
-        Integer yearOutgoTotal = incomeOutgoService.yearOutgoTotal(today());
+        Integer yearOutgoTotal = incomeOutgoService.yearOutgoTotal(centerYear(thisYearPath));
         model.addAttribute("yearOutgoTotal", yearOutgoTotal);
 
         //年間の収入合計
-        Integer yearIncomeTotal = incomeOutgoService.yearIncomeTotal(today());
+        Integer yearIncomeTotal = incomeOutgoService.yearIncomeTotal(centerYear(thisYearPath));
         model.addAttribute("yearIncomeTotal", yearIncomeTotal);
 
         //年間合計
@@ -152,8 +168,19 @@ public class IncomeOutgoController {
 
         model.addAttribute("thisMonthPath", thisMonthPath());
 
-        // 月ごとの合計
-        model.addAttribute("monthTotal", incomeOutgoService.monthTotal(today()));
+//        // 月ごとの合計
+//        model.addAttribute("monthTotal", incomeOutgoService.monthTotal(centerMonth(thisYearPath)));
+
+        //前年のパス
+        SimpleDateFormat thisYearPathFormat = new SimpleDateFormat("yyyy");
+        String prevYear = thisYearPathFormat.format(incomeOutgoService.prevYear(centerYear(thisYearPath)));
+        model.addAttribute("prevYear", prevYear);
+
+        //翌年のパス
+        String nextYear = thisYearPathFormat.format(incomeOutgoService.nextYear(centerYear(thisYearPath)));
+        model.addAttribute("nextYear", nextYear);
+
+        //翌年のパス
 
         return "income_outgo/year";
     }

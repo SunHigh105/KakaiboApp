@@ -40,9 +40,9 @@
 
             <div class="year-header">
                 <ul>
-                    <li><button class="btn btn-outline-secondary">前の年</button></li>
+                    <li><a class="btn btn-outline-secondary" th:href="@{/income_outgo/year/{prevYear}(prevYear=${prevYear})}">前の年</a></li>
                     <li><h2><span th:text="${thisYearPath}"></span>年</h2></li>
-                    <li><button class="btn btn-outline-secondary">次の年</button></li>
+                    <li><a class="btn btn-outline-secondary" th:href="@{/income_outgo/year/{nextYear}(nextYear=${nextYear})}">次の年</a></li>
                 </ul>
                 <ul>
                     <li>総支出：<span th:text="${yearOutgoTotal}"></span></li>
@@ -64,9 +64,9 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <th>2018年1月</th>
-                    <td>¥250,000</td>
-                    <td>¥190,000</td>
+?                    <th>2018年1月</th>
+                    <!--<td th:text="${cost[0]}"></td>-->
+                    <!--<td th:text="${cost[1]}"></td>-->
                     <td>¥60,000</td>
                     <td>
                         <button class="btn btn-outline-secondary">一覧</button>
