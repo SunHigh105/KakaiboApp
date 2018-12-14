@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-@Service //
+@Service
 public class IncomeOutgoService {
     @Autowired
     private IncomeOutgoRepository incomeOutgoRepository;
@@ -16,6 +16,7 @@ public class IncomeOutgoService {
         return incomeOutgoRepository.findAll();
     }
 
+    // 一ヶ月の一覧
     public List<IncomeOutgo> findByMonth(Date today){
         Calendar firstDay = createFirstDay(today);
         Date startDate = firstDay.getTime();
@@ -25,7 +26,7 @@ public class IncomeOutgoService {
         return incomeOutgoRepository.findByMonth(startDate, lastDate);
     }
 
-    //前月のパスを取得
+    //前月のX月1日
     public Date prevMonth(Date today){
         Calendar firstDay = createFirstDay(today);
         firstDay.add(Calendar.MONTH, -1);
@@ -33,7 +34,7 @@ public class IncomeOutgoService {
         return prevMonth;
     }
 
-    //次月のパス
+    //来月のX月1日
     public Date nextMonth(Date today){
         Calendar firstDay = createFirstDay(today);
         firstDay.add(Calendar.MONTH, 1);
@@ -55,7 +56,6 @@ public class IncomeOutgoService {
         return firstYear.getTime();
     }
 
-
     // 年間の支出合計を取得
     public Integer yearOutgoTotal(Date today){
         return incomeOutgoRepository.costTotal("outgo", startDateYear(today), lastDateYear(today));
@@ -65,14 +65,26 @@ public class IncomeOutgoService {
         return incomeOutgoRepository.costTotal("income", startDateYear(today), lastDateYear(today));
     }
 
-    //年間の一覧を取得
-    public List<IncomeOutgo> fincByYear(Date today){
-        Calendar firstYear = createFirstYear(today);
-        Date startYear = firstYear.getTime();
-        // 1年プラスしてからDate型に変換
-        firstYear.add(Calendar.YEAR, 1);
-        Date lastYear = firstYear.getTime();
-        return incomeOutgoRepository.findByYear(startYear, lastYear);
+    // 月間の収入or支出合計をリストで取得
+    public int[][] monthTotal(Date today){
+        Calendar startCal = createFirstYear(today);
+        int result[][];
+        result = new int[12][];
+
+        for (int i = 0; i <= 11; i++){
+            Date startDate = startCal.getTime();
+            startCal.add(Calendar.MONTH, 1);
+            Date lastDate = startCal.getTime();
+            Integer outgo = incomeOutgoRepository.costTotal("outgo", startDate, lastDate);
+            Integer income = incomeOutgoRepository.costTotal("income", startDate, lastDate);
+            result[i] = new int[2];
+            result[i][0] = outgo;
+            result[i][1] = income;
+
+            // 1ヶ月ずつ追加
+//            startCal.add(Calendar.MONTH, 1);
+        }
+        return result;
     }
 
 
