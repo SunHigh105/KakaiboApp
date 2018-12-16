@@ -168,8 +168,8 @@ public class IncomeOutgoController {
 
         model.addAttribute("thisMonthPath", thisMonthPath());
 
-//        // 月ごとの合計
-//        model.addAttribute("monthTotal", incomeOutgoService.monthTotal(centerMonth(thisYearPath)));
+        // 月ごとの合計
+        model.addAttribute("monthTotal", incomeOutgoService.monthTotal(centerYear(thisYearPath)));
 
         //前年のパス
         SimpleDateFormat thisYearPathFormat = new SimpleDateFormat("yyyy");

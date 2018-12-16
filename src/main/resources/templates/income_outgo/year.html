@@ -63,11 +63,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-?                    <th>2018年1月</th>
-                    <!--<td th:text="${cost[0]}"></td>-->
-                    <!--<td th:text="${cost[1]}"></td>-->
-                    <td>¥60,000</td>
+                <tr th:each="cost:${monthTotal}">
+                    <th th:text="${cost[0]}"></th>
+                    <td th:text="${cost[1]}"></td>
+                    <td th:text="${cost[2]}"></td>
+                    <td th:text="${cost[1]-cost[2]}"></td>
                     <td>
                         <button class="btn btn-outline-secondary">一覧</button>
                     </td>

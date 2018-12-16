@@ -3,6 +3,7 @@ package income_outgo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -74,23 +75,35 @@ public class IncomeOutgoService {
     }
 
     // 月間の収入or支出合計をリストで取得
-    public int[][] monthTotal(Date today){
+    public Object[][] monthTotal(Date today){
         Calendar startCal = createFirstYear(today);
-        int result[][];
-        result = new int[12][];
+        Object result[][];
+        result = new Object[12][36];
 
         for (int i = 0; i <= 11; i++){
             Date startDate = startCal.getTime();
+
+            SimpleDateFormat thisMonthFormat = new SimpleDateFormat("yyyy年MM月");
+            String dateIndex = thisMonthFormat.format(startDate);
+            result[i][0] = dateIndex;
+
             startCal.add(Calendar.MONTH, 1);
             Date lastDate = startCal.getTime();
-            Integer outgo = incomeOutgoRepository.costTotal("outgo", startDate, lastDate);
-            Integer income = incomeOutgoRepository.costTotal("income", startDate, lastDate);
-            result[i] = new int[2];
-            result[i][0] = outgo;
-            result[i][1] = income;
 
-            // 1ヶ月ずつ追加
-//            startCal.add(Calendar.MONTH, 1);
+            Integer income = incomeOutgoRepository.costTotal("income", startDate, lastDate);
+            if (income == null){
+                result[i][1] = 0;
+            }else{
+                result[i][1] = income;
+            }
+
+            Integer outgo = incomeOutgoRepository.costTotal("outgo", startDate, lastDate);
+            if (outgo == null){
+                result[i][2] = 0;
+            }else{
+                result[i][2] = outgo;
+            }
+
         }
         return result;
     }
