@@ -69,7 +69,7 @@
                     <td th:text="${cost[2]}"></td>
                     <td th:text="${cost[1]-cost[2]}"></td>
                     <td>
-                        <button class="btn btn-outline-secondary">一覧</button>
+                        <a class="btn btn-outline-secondary" th:href="@{/income_outgo/month/{monthPath}(monthPath=${cost[0]})}">一覧</a>
                     </td>
                 </tr>
                 </tbody>

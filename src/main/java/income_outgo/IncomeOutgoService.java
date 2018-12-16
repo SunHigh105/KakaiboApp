@@ -83,7 +83,7 @@ public class IncomeOutgoService {
         for (int i = 0; i <= 11; i++){
             Date startDate = startCal.getTime();
 
-            SimpleDateFormat thisMonthFormat = new SimpleDateFormat("yyyy年MM月");
+            SimpleDateFormat thisMonthFormat = new SimpleDateFormat("yyyy-MM");
             String dateIndex = thisMonthFormat.format(startDate);
             result[i][0] = dateIndex;
 

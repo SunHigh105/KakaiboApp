@@ -161,9 +161,13 @@ public class IncomeOutgoController {
         model.addAttribute("yearIncomeTotal", yearIncomeTotal);
 
         //年間合計
-        Integer yearTotal = yearIncomeTotal - yearOutgoTotal;
-        model.addAttribute("yearTotal", yearTotal);
+        try{
+            Integer yearTotal = yearIncomeTotal - yearOutgoTotal;
+            model.addAttribute("yearTotal", yearTotal);
 
+        }catch(NullPointerException e){
+            model.addAttribute("yearTotal", 0);
+        }
         model.addAttribute("thisYearPath", thisYearPath);
 
         model.addAttribute("thisMonthPath", thisMonthPath());
