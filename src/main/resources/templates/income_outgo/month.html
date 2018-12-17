@@ -77,7 +77,9 @@
                         <a class="btn btn-outline-secondary" th:href="@{/income_outgo/{id}/edit(id=*{id})}">編集</a>
                     </td>
                     <td>
+                        <!--<form th:action="@{/income_outgo/{id}/(id=*{id})}" th:method="delete">-->
                         <form th:action="@{/income_outgo/{id}/(id=*{id})}" th:method="delete">
+                            <input type="hidden" value="${thisMonthPath}">
                             <input class="btn btn-outline-secondary" type="submit" value="削除" />
                         </form>
                     </td>

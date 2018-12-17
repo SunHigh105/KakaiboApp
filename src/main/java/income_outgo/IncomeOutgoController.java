@@ -201,13 +201,14 @@ public class IncomeOutgoController {
     public String update(@PathVariable Long id, @ModelAttribute IncomeOutgo incomeOutgo){
         incomeOutgo.setId(id);
         incomeOutgoService.save(incomeOutgo);
-        return "redirect:/income_outgo/month";
+        return "redirect:/income_outgo/{id}/edit";
     }
 
     @DeleteMapping("{id}")
     public String destroy(@PathVariable  Long id){
+//        String deleteDatePath = thisMonthPathFormat.format(deleteDate);
         incomeOutgoService.deleteById(id);
-        return "redirect:/income_outgo/month";
+        return "income_outgo/{id}";
     }
 
 }

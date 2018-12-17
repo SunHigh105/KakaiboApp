@@ -52,26 +52,29 @@
                     </div>
                 </div>
                 <div class="form-group-row">
-                    <div class="col-sm-4">
-                        <input type="checkbox" class="form-check-input" name="type" value="outgo">
-                        <label class="form-check-label">支出</label>
-                    </div>
-                    <div class="col-sm-4">
-                        <input type="checkbox" class="form-check-input" name="type" value="income">
-                        <label class="form-check-label">収入</label>
+                    <div th:switch="*{type}">
+                        <div th:case="outgo">
+                            <div class="col-sm-2">
+                                <input type="radio" class="form-check-input" name="type" value="outgo" checked="checked">
+                                <label class="form-check-label">支出</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="radio" class="form-check-input" name="type" value="income">
+                                <label class="form-check-label">収入</label>
+                            </div>
+                        </div>
+                        <div th:case="income">
+                            <div class="col-sm-2">
+                                <input type="radio" class="form-check-input" name="type" value="outgo">
+                                <label class="form-check-label">支出</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="radio" class="form-check-input" name="type" value="income" checked="checked">
+                                <label class="form-check-label">収入</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!--<div class="form-group row">-->
-                    <!--<label class="col-sm-2 col-form-label">色</label>-->
-                    <!--<div class="col-sm-6">-->
-                        <!--<select class="custom-select" name="color">-->
-                            <!--<option selected disabled>選択して下さい</option>-->
-                            <!--<option value="1">食費</option>-->
-                            <!--<option value="2">日用品</option>-->
-                            <!--<option value="3">交通費</option>-->
-                        <!--</select>-->
-                    <!--</div>-->
-                <!--</div>-->
                 <button class="btn btn-outline-secondary" type="submit">更新</button>
             </form>
         </div>

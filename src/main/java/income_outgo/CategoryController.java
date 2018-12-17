@@ -61,7 +61,6 @@ public class CategoryController {
         return "category/edit";
     }
 
-
     @PostMapping("/setting")
     public String create(@ModelAttribute Category category){
         categoryService.save(category);

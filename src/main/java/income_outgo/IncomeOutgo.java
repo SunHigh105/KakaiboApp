@@ -34,8 +34,6 @@ public class IncomeOutgo {
     }
 
     public java.util.Date getDate() {
-//       SimpleDateFormat StringDate = new SimpleDateFormat("yyyy-MM-dd");
-//       return StringDate.format(date);Date;
         return date;
     }
 
