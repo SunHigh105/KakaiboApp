@@ -96,7 +96,7 @@
                     <!-- income -->
                     <div class="input-form" id="income" role="tabpanel" aria-labelledby="income-tab">
                         <h4>【収入】</h4>
-                        <form th:action="@{/income_outgo/new}">
+                        <form th:action="@{/income_outgo/new}" th:method="post">
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">日付</label>
                                 <div class="col-sm-6">
@@ -123,11 +123,11 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">MEMO</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control"  name="memo">
+                                    <input type="text" class="form-control" name="memo">
                                 </div>
                             </div>
                             <input type="hidden" name="type" value="income">
-                            <button class="btn btn-primary">入力する</button>
+                            <button class="btn btn-primary" type="submit">入力する</button>
                         </form>
                     </div>
 

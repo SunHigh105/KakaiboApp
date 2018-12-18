@@ -10,108 +10,106 @@
     <script src="/js/bootstrap.js"></script>
 </head>
 <body>
-<!-- header -->
-<nav class="navbar navbar-dark" style="background-color: #34302c;">
-    <div class="container">
-        <a class="navbar-brand"><h2 class="logo">KakeiboApp</h2></a>
-        <div class="account">
-            <ul>
-                <li class="account-link"><img src="/img/user.ico" width="60%"></li>
-                <li class="account-link"><span>ユーザー さん</span></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<div class="container">
-    <div class="row">
-
-        <!-- left side bar -->
-        <div class="col sidebar">
-            <ul class="nav flex-column nav-pills">
-                <li class="nav-item"><a class="nav-link" href="/income_outgo/new">入力</a></li>
-                <li class="nav-item"><a class="nav-link active" href="/income_outgo/month" th:href="@{/income_outgo/month/{thisMonthPath}(thisMonthPath=${thisMonthPath})}">月別一覧</a></li>
-                <li class="nav-item"><a class="nav-link" href="/income_outgo/year" th:href="@{/income_outgo/year/{thisYearPath}(thisYearPath=${thisYearPath})}">年間一覧</a></li>
-                <li class="nav-item"><a class="nav-link" href="/category/setting">設定</a></li>
-            </ul>
-        </div>
-
-        <!-- Main contents -->
-        <div class="col">
-
-            <div class="month-header">
+    <!-- header -->
+    <nav class="navbar navbar-dark" style="background-color: #34302c;">
+        <div class="container">
+            <a class="navbar-brand"><h2 class="logo">KakeiboApp</h2></a>
+            <div class="account">
                 <ul>
-                    <li><a class="btn btn-outline-secondary" href="/income_outgo/month" th:href="@{/income_outgo/month/{thisMonthPath}(thisMonthPath=${prevMonthPath})}">前の月</a></li>
-                    <li><h2 th:text="${thisMonth}"></h2></li>
-                    <li><a class="btn btn-outline-secondary" href="/income_outgo/month" th:href="@{/income_outgo/month/{thisMonthPath}(thisMonthPath=${nextMonthPath})}">次の月</a></li>
+                    <li class="account-link"><img src="/img/user.ico" width="60%"></li>
+                    <li class="account-link"><span>ユーザー さん</span></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+
+            <!-- left side bar -->
+            <div class="col sidebar">
+                <ul class="nav flex-column nav-pills">
+                    <li class="nav-item"><a class="nav-link" href="/income_outgo/new">入力</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/income_outgo/month" th:href="@{/income_outgo/month/{thisMonthPath}(thisMonthPath=${thisMonthPath})}">月別一覧</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/income_outgo/year" th:href="@{/income_outgo/year/{thisYearPath}(thisYearPath=${thisYearPath})}">年間一覧</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/category/setting">設定</a></li>
                 </ul>
             </div>
 
-            <!-- income and outgo list -->
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">登録日</th>
-                    <th scope="col">収入/支出</th>
-                    <th scope="col">カテゴリ</th>
-                    <th scope="col">MEMO</th>
-                    <th scope="col">金額</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="month:${monthList}" th:object="${month}">
-                    <th th:text="*{date}"></th>
-                    <div th:switch="*{type}">
-                        <td th:case="'outgo'">支出</td>
-                        <td th:case="'income'">収入</td>
-                    </div>
-                    <div th:each="category:${categories}">
-                        <div th:switch="${category.id}">
-                            <td th:case="*{category_id}" th:text="${category.name}"></td>
-                        </div>
-                    </div>
-                    <td th:text="*{memo}"></td>
-                    <td th:text="*{cost}"></td>
-                    <td>
-                        <a class="btn btn-outline-secondary" th:href="@{/income_outgo/{id}/edit(id=*{id})}">編集</a>
-                    </td>
-                    <td>
-                        <!--<form th:action="@{/income_outgo/{id}/(id=*{id})}" th:method="delete">-->
-                        <form th:action="@{/income_outgo/{id}/(id=*{id})}" th:method="delete">
-                            <input type="hidden" value="${thisMonthPath}">
-                            <input class="btn btn-outline-secondary" type="submit" value="削除" />
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <!-- Main contents -->
+            <div class="col">
 
-            <!-- Pagination -->
-            <div class="month-pagination">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                </ul>
+                <div class="month-header">
+                    <ul>
+                        <li><a class="btn btn-outline-secondary" href="/income_outgo/month" th:href="@{/income_outgo/month/{thisMonthPath}(thisMonthPath=${prevMonthPath})}">前の月</a></li>
+                        <li><h2 th:text="${thisMonth}"></h2></li>
+                        <li><a class="btn btn-outline-secondary" href="/income_outgo/month" th:href="@{/income_outgo/month/{thisMonthPath}(thisMonthPath=${nextMonthPath})}">次の月</a></li>
+                    </ul>
+                </div>
+
+                <!-- income and outgo list -->
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">登録日</th>
+                        <th scope="col">収入/支出</th>
+                        <th scope="col">カテゴリ</th>
+                        <th scope="col">MEMO</th>
+                        <th scope="col">金額</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="month:${monthList}" th:object="${month}">
+                        <th th:text="*{date}"></th>
+                        <div th:switch="*{type}">
+                            <td th:case="'outgo'">支出</td>
+                            <td th:case="'income'">収入</td>
+                        </div>
+                        <div th:each="category:${categories}">
+                            <div th:switch="${category.id}">
+                                <td th:case="*{category_id}" th:text="${category.name}"></td>
+                            </div>
+                        </div>
+                        <td th:text="*{memo}"></td>
+                        <td th:text="*{cost}"></td>
+                        <td>
+                            <a class="btn btn-outline-secondary" th:href="@{/income_outgo/{id}/edit(id=*{id})}">編集</a>
+                        </td>
+                        <td>
+                            <form th:action="@{/income_outgo/month/{centerMonthPath}/{id}/(centerMonthPath=${centerMonthPath},id=*{id})}" th:method="delete">
+                                <input class="btn btn-outline-secondary" type="submit" value="削除"/>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- Pagination -->
+                <div class="month-pagination">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
 
         </div>
-
     </div>
-</div>
 
 </body>
 </html>

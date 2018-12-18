@@ -114,6 +114,10 @@ public class IncomeOutgoController {
         List<IncomeOutgo> monthList = incomeOutgoService.findByMonth(centerMonth(thisMonthPath));
         model.addAttribute("monthList", monthList);
 
+        // 基準の月のパス取得
+        String centerMonthPath = thisMonthPathFormat.format(centerMonth(thisMonthPath));
+        model.addAttribute("centerMonthPath", centerMonthPath);
+
         // 前月の一覧のパス取得
         Date prevMonth = incomeOutgoService.prevMonth(centerMonth(thisMonthPath));
         String prevMonthPath = thisMonthPathFormat.format(prevMonth);
@@ -204,11 +208,10 @@ public class IncomeOutgoController {
         return "redirect:/income_outgo/{id}/edit";
     }
 
-    @DeleteMapping("{id}")
-    public String destroy(@PathVariable  Long id){
-//        String deleteDatePath = thisMonthPathFormat.format(deleteDate);
+    @DeleteMapping("month/{centerMonthPath}/{id}")
+    public String destroy(@PathVariable  Long id, @PathVariable String centerMonthPath){
         incomeOutgoService.deleteById(id);
-        return "income_outgo/{id}";
+        return "redirect:/income_outgo/month/{centerMonthPath}";
     }
 
 }
