@@ -4,39 +4,65 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Date;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class IncomeOutgo {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+    private Long id;
+    private Long cost;
+    private Date date;
+    private String memo;
+    private String type;
+    private Long category_id;
 
-    private String name;
-
-    private String email;
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Long getCost() {
+        return cost;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCost(Long cost) {
+        this.cost = cost;
     }
 
-    public String getEmail() {
-        return email;
+    public java.util.Date getDate() {
+        return date;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setDate(String date) {
+        this.date = Date.valueOf(date);
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Long getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(Long category_id) {
+        this.category_id = category_id;
     }
 
 

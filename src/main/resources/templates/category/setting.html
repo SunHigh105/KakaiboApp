@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>KakeiboApp</title>
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+</head>
+<body>
+<!-- header -->
+<nav class="navbar navbar-dark" style="background-color: #34302c;">
+    <div class="container">
+        <a class="navbar-brand"><h2 class="logo">KakeiboApp</h2></a>
+        <div class="account">
+            <ul>
+                <li class="account-link"><img src="/img/user.ico" width="60%"></li>
+                <li class="account-link"><span>ユーザー さん</span></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+
+        <!-- left side bar -->
+        <div class="col sidebar">
+            <ul class="nav flex-column nav-pills">
+                <li class="nav-item"><a class="nav-link" href="/income_outgo/new">入力</a></li>
+                <li class="nav-item"><a class="nav-link" href="/income_outgo/month" th:href="@{/income_outgo/month/{thisMonthPath}(thisMonthPath=${thisMonthPath})}">月別一覧</a></li>
+                <li class="nav-item"><a class="nav-link" href="/income_outgo/year" th:href="@{/income_outgo/year/{thisYearPath}(thisYearPath=${thisYearPath})}">年間一覧</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/category/setting">設定</a></li>
+            </ul>
+        </div>
+
+        <!-- Main contents -->
+    <div class="col">
+        <div class="setting-header">
+            <h2>設定</h2>
+        </div>
+
+        <!-- Category Setting (outgo)-->
+        <div class="outgo-setting">
+            <p>カテゴリ(支出)</p>
+            <form th:action="@{/category/setting}" th:method="post">
+                <div class="form-group row">
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="name">
+                        <input type="hidden" name="type" value="outgo">
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-outline-secondary" type="submit">追加</button>
+                    </div>
+                </div>
+            </form>
+
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">カテゴリ</th>
+                    <th scope="col">色</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="category:${categories_outgo}" th:object="${category}">
+                    <td th:text="*{name}"></td>
+                    <td>橙</td>
+                    <td class="setting-button">
+                        <a class="btn btn-outline-secondary" th:href="@{/category/{id}/edit(id=*{id})}">編集</a>
+                    </td>
+                    <td class="setting-button">
+                        <form th:action="@{/category/{id}/(id=*{id})}" th:method="delete">
+                            <input class="btn btn-outline-secondary" type="submit" value="削除" />
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Category Setting (income)-->
+        <div class="outgo-setting">
+            <p>カテゴリ(収入)</p>
+            <form th:actoon="@{/category/setting}" method="post">
+                <div class="form-group row">
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" name="name">
+                        <input type="hidden" name="type" value="income">
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-outline-secondary" type="submit">追加</button>
+                    </div>
+                </div>
+            </form>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">カテゴリ</th>
+                    <th scope="col">色</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="category:${categories_income}" th:object="${category}">
+                    <td th:text="*{name}"></td>
+                    <td>橙</td>
+                    <td class="setting-button">
+                        <a class="btn btn-outline-secondary" th:href="@{/category/{id}/edit(id=*{id})}">編集</a>
+                    </td>
+                    <td class="setting-button">
+                        <form th:action="@{/category/{id}/(id=*{id})}" th:method="delete">
+                            <input class="btn btn-outline-secondary" type="submit" value="削除" />
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

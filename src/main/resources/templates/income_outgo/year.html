@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>KakeiboApp</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+</head>
+<body>
+<!-- header -->
+<nav class="navbar navbar-dark" style="background-color: #34302c;">
+    <div class="container">
+        <a class="navbar-brand"><h2 class="logo">KakeiboApp</h2></a>
+        <div class="account">
+            <ul>
+                <li class="account-link"><img src="/img/user.ico" width="60%"></li>
+                <li class="account-link"><span>ユーザー さん</span></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+
+        <!-- left side bar -->
+        <div class="col sidebar">
+            <ul class="nav flex-column nav-pills">
+                <li class="nav-item"><a class="nav-link" href="/income_outgo/new">入力</a></li>
+                <li class="nav-item"><a class="nav-link" href="/income_outgo/month" th:href="@{/income_outgo/month/{thisMonthPath}(thisMonthPath=${thisMonthPath})}">月別一覧</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/income_outgo/year" th:href="@{/income_outgo/year/{thisYearPath}(thisYearPath=${thisYearPath})}">年間一覧</a></li>
+                <li class="nav-item"><a class="nav-link" href="/category/setting">設定</a></li>
+            </ul>
+        </div>
+
+        <!-- Main contents -->
+        <div class="col">
+
+            <div class="year-header">
+                <ul>
+                    <li><a class="btn btn-outline-secondary" th:href="@{/income_outgo/year/{prevYear}(prevYear=${prevYear})}">前の年</a></li>
+                    <li><h2><span th:text="${thisYearPath}"></span>年</h2></li>
+                    <li><a class="btn btn-outline-secondary" th:href="@{/income_outgo/year/{nextYear}(nextYear=${nextYear})}">次の年</a></li>
+                </ul>
+                <ul>
+                    <li>総支出：<span th:text="${yearOutgoTotal}"></span></li>
+                    <li>総収入：<span th:text="${yearIncomeTotal}"></span></li>
+                    <li>年間合計：<span th:text="${yearTotal}"></span></li>
+                </ul>
+            </div>
+
+            <!-- monthly list -->
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">収入</th>
+                    <th scope="col">支出</th>
+                    <th scope="col">合計</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cost:${monthTotal}">
+                    <th th:text="${cost[0]}"></th>
+                    <td th:text="${cost[1]}"></td>
+                    <td th:text="${cost[2]}"></td>
+                    <td th:text="${cost[1]-cost[2]}"></td>
+                    <td>
+                        <a class="btn btn-outline-secondary" th:href="@{/income_outgo/month/{monthPath}(monthPath=${cost[0]})}">一覧</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
