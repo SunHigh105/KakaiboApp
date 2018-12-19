@@ -3,6 +3,8 @@ package income_outgo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -86,7 +88,7 @@ public class IncomeOutgoController {
     }
 
     @GetMapping("new")
-    public String newIncomeOutgo(Model model){
+    public String newIncomeOutgo(IncomeOutgo incomeOutgo, Model model){
         // カテゴリを取得
         model.addAttribute("categories_outgo", categories("outgo"));
         model.addAttribute("categories_income", categories("income"));
@@ -195,9 +197,16 @@ public class IncomeOutgoController {
 
 
     @PostMapping("new")
-    public String create(@ModelAttribute IncomeOutgo incomeOutgo){
-        incomeOutgoService.save(incomeOutgo);
-        return "redirect:/income_outgo/new";
+    public String create(@ModelAttribute @Validated IncomeOutgo incomeOutgo,
+                         BindingResult bindingResult,
+                         Model model){
+        if(bindingResult.hasErrors()){
+            return newIncomeOutgo(incomeOutgo, model);
+//            return "/income_outgo/new";
+        }else{
+            incomeOutgoService.save(incomeOutgo);
+            return "redirect:/income_outgo/new";
+        }
     }
 
 

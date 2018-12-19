@@ -1,9 +1,14 @@
 package income_outgo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 @Entity // This tells Hibernate to make a table out of this class
@@ -11,10 +16,16 @@ public class IncomeOutgo {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+    @NotNull(message = "収入/支出を入力してください")
+    @Max(value = 10, message = "収入/支出は10桁以内で入力してください")
     private Long cost;
+//    @NotNull(message = "日付を入力してください")
+    @DateTimeFormat
     private Date date;
+    @Size(max=10, message = "MEMOは10文字以内で入力してください")
     private String memo;
     private String type;
+    @NotNull(message = "カテゴリを選択してください")
     private Long category_id;
 
     public Long getId() {
