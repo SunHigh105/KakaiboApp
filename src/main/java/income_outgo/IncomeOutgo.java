@@ -17,7 +17,7 @@ public class IncomeOutgo {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     @NotNull(message = "収入/支出を入力してください")
-    @Max(value = 10, message = "収入/支出は10桁以内で入力してください")
+    @Max(value = 999999999, message = "収入/支出は9桁以内で入力してください")
     private Long cost;
 //    @NotNull(message = "日付を入力してください")
     @DateTimeFormat

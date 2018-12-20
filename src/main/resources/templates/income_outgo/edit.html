@@ -41,7 +41,6 @@
         <!-- Main contents -->
         <div class="col">
 
-            <!-- outgo -->
             <div class="input-form" id="outgo" role="tabpanel" aria-labelledby="outgo-tab">
                 <h4>収支の編集</h4>
                 <form th:object="${incomeOutgo}" th:action="@{/income_outgo/{id}(id=*{id})}" th:method="put">
@@ -52,7 +51,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">支出</label>
+                        <label class="col-sm-2 col-form-label">収入/支出</label>
                         <div class="col-sm-6">
                             <input type="number" class="form-control" name="cost" th:field="*{cost}">
                         </div>
@@ -82,6 +81,7 @@
                     <button class="btn btn-primary" type="submit">更新する</button>
                 </form>
             </div>
+
         </div>
 
     </div>
