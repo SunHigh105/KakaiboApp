@@ -1,7 +1,5 @@
 package income_outgo;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +18,7 @@ public class IncomeOutgo {
     @Max(value = 999999999, message = "収入/支出は9桁以内で入力してください")
     private Long cost;
 //    @NotNull(message = "日付を入力してください")
-    @DateTimeFormat
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     @Size(max=10, message = "MEMOは10文字以内で入力してください")
     private String memo;

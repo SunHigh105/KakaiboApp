@@ -139,8 +139,9 @@ public class IncomeOutgoController {
         return "income_outgo/month";
     }
 
-    @GetMapping("{id}/edit")
-    public String edit(@PathVariable Long id, Model model){
+    @GetMapping({"{id}","{id}/edit"})
+    public String edit(@PathVariable Long id,
+                       Model model){
         IncomeOutgo incomeOutgo = incomeOutgoService.findById(id);
         model.addAttribute("incomeOutgo", incomeOutgo);
         // カテゴリ
@@ -211,10 +212,17 @@ public class IncomeOutgoController {
 
 
     @PutMapping("{id}")
-    public String update(@PathVariable Long id, @ModelAttribute IncomeOutgo incomeOutgo){
-        incomeOutgo.setId(id);
-        incomeOutgoService.save(incomeOutgo);
-        return "redirect:/income_outgo/{id}/edit";
+    public String update(@PathVariable Long id,
+                         @ModelAttribute @Validated IncomeOutgo incomeOutgo,
+                         BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            System.out.println(bindingResult.getAllErrors());
+            return "income_outgo/edit";
+        }else{
+            incomeOutgo.setId(id);
+            incomeOutgoService.save(incomeOutgo);
+            return "redirect:/income_outgo/{id}/edit";
+        }
     }
 
     @DeleteMapping("month/{centerMonthPath}/{id}")
