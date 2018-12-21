@@ -41,6 +41,9 @@
         <!-- Main contents -->
         <div class="col">
 
+            <!-- alert -->
+            <div th:text="${flash}" th:if="${flash}" class="alert alert-success" role="alert"></div>
+
             <div class="input-form" id="outgo" role="tabpanel" aria-labelledby="outgo-tab">
                 <h4>収支の編集</h4>
                 <form th:object="${incomeOutgo}" th:action="@{/income_outgo/{id}(id=*{id})}" th:method="put">

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -153,6 +154,7 @@ public class IncomeOutgoController {
 
         //今年をリンクに入れる
         model.addAttribute("thisYearPath", thisYearPath());
+
         return "income_outgo/edit";
     }
 
@@ -200,12 +202,14 @@ public class IncomeOutgoController {
     @PostMapping("new")
     public String create(@ModelAttribute @Validated IncomeOutgo incomeOutgo,
                          BindingResult bindingResult,
-                         Model model){
+                         Model model,
+                         RedirectAttributes resistInfo){
         if(bindingResult.hasErrors()){
             return newIncomeOutgo(incomeOutgo, model);
 //            return "/income_outgo/new";
         }else{
             incomeOutgoService.save(incomeOutgo);
+            resistInfo.addFlashAttribute("flash", "データを登録しました！");
             return "redirect:/income_outgo/new";
         }
     }
@@ -214,13 +218,15 @@ public class IncomeOutgoController {
     @PutMapping("{id}")
     public String update(@PathVariable Long id,
                          @ModelAttribute @Validated IncomeOutgo incomeOutgo,
-                         BindingResult bindingResult){
+                         BindingResult bindingResult,
+                         RedirectAttributes updateInfo){
         if(bindingResult.hasErrors()){
             System.out.println(bindingResult.getAllErrors());
             return "income_outgo/edit";
         }else{
             incomeOutgo.setId(id);
             incomeOutgoService.save(incomeOutgo);
+            updateInfo.addFlashAttribute("flash", "データを更新しました！");
             return "redirect:/income_outgo/{id}/edit";
         }
     }

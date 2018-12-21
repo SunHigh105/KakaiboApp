@@ -38,6 +38,11 @@
             <!-- Main contents -->
             <div class="col">
 
+                <!-- alert -->
+                <!--<div th:text="${flash}" th:if="${flash}" class="alert alert-success" role="alert">-->
+                    <!--削除しました！-->
+                <!--</div>-->
+
                 <div class="month-header">
                     <ul>
                         <li><a class="btn btn-outline-secondary" href="/income_outgo/month" th:href="@{/income_outgo/month/{thisMonthPath}(thisMonthPath=${prevMonthPath})}">前の月</a></li>
@@ -117,6 +122,8 @@
                 return false;
             }
         }
+
+        $('.alert').alert()
     </script>
 
 </body>
