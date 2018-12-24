@@ -38,12 +38,14 @@
         <!-- Main contents -->
     <div class="col">
         <div class="setting-header">
-            <h2>設定</h2>
+            <h2>カテゴリの編集</h2>
         </div>
 
-        <!-- Category Setting (outgo)-->
+        <!-- alert -->
+        <div th:text="${flash}" th:if="${flash}" class="alert alert-success" role="alert"></div>
+
+        <!-- Category Setting -->
         <div class="outgo-setting">
-            <p>カテゴリの編集</p>
             <form th:action="@{/category/{id}(id=*{id})}" th:method="put" th:object="${category}">
                 <p><span class="error-message" th:if="${#fields.hasErrors('*{name}')}" th:errors="*{name}"></span></p>
                 <div class="form-group row">

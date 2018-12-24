@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/category")
@@ -65,30 +66,36 @@ public class CategoryController {
     @PostMapping("/setting")
     public String create(@Validated @ModelAttribute Category category,
                          BindingResult bindingResult,
-                         Model model){
+                         Model model,
+                         RedirectAttributes resistInfo){
         if(bindingResult.hasErrors()){
             return newCategory(category, model);
+        }else{
+            categoryService.save(category);
+            resistInfo.addFlashAttribute("flash", "データを登録しました！");
+            return "redirect:/category/setting";
         }
-        categoryService.save(category);
-        return "redirect:/category/setting";
     }
 
     @PutMapping("{id}")
     public String update(@PathVariable Long id,
                          @Validated @ModelAttribute Category category,
-                         BindingResult bindingResult){
+                         BindingResult bindingResult,
+                         RedirectAttributes updateInfo){
         if(bindingResult.hasErrors()){
             return "category/edit";
         }else{
             category.setId(id);
             categoryService.save(category);
+            updateInfo.addFlashAttribute("flash", "データを更新しました！");
             return "redirect:/category/setting";
         }
     }
 
     @DeleteMapping("{id}")
-    public String destroy(@PathVariable Long id){
+    public String destroy(@PathVariable Long id, RedirectAttributes deleteInfo){
         categoryService.deleteById(id);
+        deleteInfo.addFlashAttribute("flash", "データを削除しました！");
         return "redirect:/category/setting";
     }
 }

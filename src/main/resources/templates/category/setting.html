@@ -41,6 +41,9 @@
             <h2>設定</h2>
         </div>
 
+        <!-- alert -->
+        <div th:text="${flash}" th:if="${flash}" class="alert alert-success" role="alert"></div>
+
         <!-- Category Setting (outgo)-->
         <div class="outgo-setting">
             <h5>カテゴリを追加</h5>
@@ -88,7 +91,7 @@
                     </td>
                     <td class="setting-button">
                         <form th:action="@{/category/{id}/(id=*{id})}" th:method="delete">
-                            <input class="btn btn-outline-secondary" type="submit" value="削除" />
+                            <input onclick="return deleteConfirm()" class="btn btn-outline-secondary" type="submit" value="削除" />
                         </form>
                     </td>
                 </tr>
@@ -116,7 +119,7 @@
                     </td>
                     <td class="setting-button">
                         <form th:action="@{/category/{id}/(id=*{id})}" th:method="delete">
-                            <input class="btn btn-outline-secondary" type="submit" value="削除" />
+                            <input onclick="return deleteConfirm()" class="btn btn-outline-secondary" type="submit" value="削除" />
                         </form>
                     </td>
                 </tr>
@@ -129,6 +132,14 @@
 
     </div>
 </div>
+
+    <script type="text/javascript" th:inline="javascript">
+        function deleteConfirm(){
+            if(!confirm("削除しますか？")){
+                return false;
+            }
+        }
+    </script>
 
 </body>
 </html>

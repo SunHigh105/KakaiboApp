@@ -232,8 +232,11 @@ public class IncomeOutgoController {
     }
 
     @DeleteMapping("month/{centerMonthPath}/{id}")
-    public String destroy(@PathVariable  Long id, @PathVariable String centerMonthPath){
+    public String destroy(@PathVariable  Long id,
+                          @PathVariable String centerMonthPath,
+                          RedirectAttributes deleteInfo){
         incomeOutgoService.deleteById(id);
+        deleteInfo.addFlashAttribute("flash", "データを削除しました！");
         return "redirect:/income_outgo/month/{centerMonthPath}";
     }
 
