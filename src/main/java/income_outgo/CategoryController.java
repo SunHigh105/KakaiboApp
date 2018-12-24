@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +42,7 @@ public class CategoryController {
     }
 
     @GetMapping("setting")
-    public String newcCategory(Model model){
+    public String newCategory(Category category, Model model){
         model.addAttribute("categories_outgo", categories("outgo"));
         model.addAttribute("categories_income", categories("income"));
         //今月をリンクに入れる
@@ -62,16 +63,27 @@ public class CategoryController {
     }
 
     @PostMapping("/setting")
-    public String create(@ModelAttribute Category category){
+    public String create(@Validated @ModelAttribute Category category,
+                         BindingResult bindingResult,
+                         Model model){
+        if(bindingResult.hasErrors()){
+            return newCategory(category, model);
+        }
         categoryService.save(category);
         return "redirect:/category/setting";
     }
 
     @PutMapping("{id}")
-    public String update(@PathVariable Long id, @ModelAttribute Category category){
-        category.setId(id);
-        categoryService.save(category);
-        return "redirect:/category/setting";
+    public String update(@PathVariable Long id,
+                         @Validated @ModelAttribute Category category,
+                         BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "category/edit";
+        }else{
+            category.setId(id);
+            categoryService.save(category);
+            return "redirect:/category/setting";
+        }
     }
 
     @DeleteMapping("{id}")

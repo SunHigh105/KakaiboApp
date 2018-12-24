@@ -4,13 +4,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Category {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+    @NotNull(message = "カテゴリ名を入力してください")
+    @Size(min = 1, max = 10, message = "カテゴリ名は10文字以内で入力してください")
     private String name;
+    @NotNull(message = "収入か支出を選択してください")
     private String type;
 
     public Long getId() {
