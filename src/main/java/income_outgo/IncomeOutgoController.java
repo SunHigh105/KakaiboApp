@@ -3,7 +3,10 @@ package income_outgo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -86,7 +89,7 @@ public class IncomeOutgoController {
     }
 
     @GetMapping("new")
-    public String newIncomeOutgo(Model model){
+    public String newIncomeOutgo(IncomeOutgo incomeOutgo, Model model){
         // カテゴリを取得
         model.addAttribute("categories_outgo", categories("outgo"));
         model.addAttribute("categories_income", categories("income"));
@@ -137,8 +140,9 @@ public class IncomeOutgoController {
         return "income_outgo/month";
     }
 
-    @GetMapping("{id}/edit")
-    public String edit(@PathVariable Long id, Model model){
+    @GetMapping({"{id}","{id}/edit"})
+    public String edit(@PathVariable Long id,
+                       Model model){
         IncomeOutgo incomeOutgo = incomeOutgoService.findById(id);
         model.addAttribute("incomeOutgo", incomeOutgo);
         // カテゴリ
@@ -150,6 +154,7 @@ public class IncomeOutgoController {
 
         //今年をリンクに入れる
         model.addAttribute("thisYearPath", thisYearPath());
+
         return "income_outgo/edit";
     }
 
@@ -195,22 +200,43 @@ public class IncomeOutgoController {
 
 
     @PostMapping("new")
-    public String create(@ModelAttribute IncomeOutgo incomeOutgo){
-        incomeOutgoService.save(incomeOutgo);
-        return "redirect:/income_outgo/new";
+    public String create(@ModelAttribute @Validated IncomeOutgo incomeOutgo,
+                         BindingResult bindingResult,
+                         Model model,
+                         RedirectAttributes resistInfo){
+        if(bindingResult.hasErrors()){
+            return newIncomeOutgo(incomeOutgo, model);
+//            return "/income_outgo/new";
+        }else{
+            incomeOutgoService.save(incomeOutgo);
+            resistInfo.addFlashAttribute("flash", "データを登録しました！");
+            return "redirect:/income_outgo/new";
+        }
     }
 
 
     @PutMapping("{id}")
-    public String update(@PathVariable Long id, @ModelAttribute IncomeOutgo incomeOutgo){
-        incomeOutgo.setId(id);
-        incomeOutgoService.save(incomeOutgo);
-        return "redirect:/income_outgo/{id}/edit";
+    public String update(@PathVariable Long id,
+                         @ModelAttribute @Validated IncomeOutgo incomeOutgo,
+                         BindingResult bindingResult,
+                         RedirectAttributes updateInfo){
+        if(bindingResult.hasErrors()){
+            System.out.println(bindingResult.getAllErrors());
+            return "income_outgo/edit";
+        }else{
+            incomeOutgo.setId(id);
+            incomeOutgoService.save(incomeOutgo);
+            updateInfo.addFlashAttribute("flash", "データを更新しました！");
+            return "redirect:/income_outgo/{id}/edit";
+        }
     }
 
     @DeleteMapping("month/{centerMonthPath}/{id}")
-    public String destroy(@PathVariable  Long id, @PathVariable String centerMonthPath){
+    public String destroy(@PathVariable  Long id,
+                          @PathVariable String centerMonthPath,
+                          RedirectAttributes deleteInfo){
         incomeOutgoService.deleteById(id);
+        deleteInfo.addFlashAttribute("flash", "データを削除しました！");
         return "redirect:/income_outgo/month/{centerMonthPath}";
     }
 

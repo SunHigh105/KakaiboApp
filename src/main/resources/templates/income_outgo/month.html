@@ -38,6 +38,9 @@
             <!-- Main contents -->
             <div class="col">
 
+                <!-- alert -->
+                <div th:text="${flash}" th:if="${flash}" class="alert alert-success" role="alert"></div>
+
                 <div class="month-header">
                     <ul>
                         <li><a class="btn btn-outline-secondary" href="/income_outgo/month" th:href="@{/income_outgo/month/{thisMonthPath}(thisMonthPath=${prevMonthPath})}">前の月</a></li>
@@ -78,7 +81,7 @@
                         </td>
                         <td>
                             <form th:action="@{/income_outgo/month/{centerMonthPath}/{id}/(centerMonthPath=${centerMonthPath},id=*{id})}" th:method="delete">
-                                <input class="btn btn-outline-secondary" type="submit" value="削除"/>
+                                <input onclick="return deleteConfirm()" class="btn btn-outline-secondary" type="submit" value="削除"/>
                             </form>
                         </td>
                     </tr>
@@ -110,6 +113,16 @@
 
         </div>
     </div>
+
+    <script type="text/javascript" th:inline="javascript">
+        function deleteConfirm(){
+            if(!confirm("削除しますか？")){
+                return false;
+            }
+        }
+
+        $('.alert').alert()
+    </script>
 
 </body>
 </html>

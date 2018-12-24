@@ -38,40 +38,42 @@
         <!-- Main contents -->
     <div class="col">
         <div class="setting-header">
-            <h2>設定</h2>
+            <h2>カテゴリの編集</h2>
         </div>
 
-        <!-- Category Setting (outgo)-->
+        <!-- alert -->
+        <div th:text="${flash}" th:if="${flash}" class="alert alert-success" role="alert"></div>
+
+        <!-- Category Setting -->
         <div class="outgo-setting">
-            <p>カテゴリの編集</p>
             <form th:action="@{/category/{id}(id=*{id})}" th:method="put" th:object="${category}">
+                <p><span class="error-message" th:if="${#fields.hasErrors('*{name}')}" th:errors="*{name}"></span></p>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">カテゴリ名</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" name="name" th:field="*{name}">
                     </div>
                 </div>
-                <div class="form-group-row">
-                    <div th:switch="*{type}">
-                        <div th:case="outgo">
-                            <div class="col-sm-2">
-                                <input type="radio" class="form-check-input" name="type" value="outgo" checked="checked">
-                                <label class="form-check-label">支出</label>
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="radio" class="form-check-input" name="type" value="income">
-                                <label class="form-check-label">収入</label>
-                            </div>
+                <div th:switch="*{type}">
+                    <p><span class="error-message" th:if="${#fields.hasErrors('*{type}')}" th:errors="*{type}"></span></p>
+                    <div class="form-group row typecheck" th:case="outgo">
+                        <div class="col-sm-2">
+                            <input type="radio" class="form-check-input" name="type" value="outgo" checked="checked">
+                            <label class="form-check-label">支出</label>
                         </div>
-                        <div th:case="income">
-                            <div class="col-sm-2">
-                                <input type="radio" class="form-check-input" name="type" value="outgo">
-                                <label class="form-check-label">支出</label>
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="radio" class="form-check-input" name="type" value="income" checked="checked">
-                                <label class="form-check-label">収入</label>
-                            </div>
+                        <div class="col-sm-2">
+                            <input type="radio" class="form-check-input" name="type" value="income">
+                            <label class="form-check-label">収入</label>
+                        </div>
+                    </div>
+                    <div class="form-group row typecheck" th:case="income">
+                        <div class="col-sm-2">
+                            <input type="radio" class="form-check-input" name="type" value="outgo">
+                            <label class="form-check-label">支出</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="radio" class="form-check-input" name="type" value="income" checked="checked">
+                            <label class="form-check-label">収入</label>
                         </div>
                     </div>
                 </div>

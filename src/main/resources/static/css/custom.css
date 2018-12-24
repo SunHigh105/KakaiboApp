@@ -100,4 +100,14 @@
     width: 15%;
 }
 
+.typecheck{
+    margin-left: 10px;
+}
+
+
+/* error message */
+.error-message {
+  color: #dc3545;
+  font-size: 80%;
+}
 

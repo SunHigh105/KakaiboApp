@@ -41,25 +41,30 @@
         <!-- Main contents -->
         <div class="col">
 
-            <!-- outgo -->
+            <!-- alert -->
+            <div th:text="${flash}" th:if="${flash}" class="alert alert-success" role="alert"></div>
+
             <div class="input-form" id="outgo" role="tabpanel" aria-labelledby="outgo-tab">
                 <h4>収支の編集</h4>
                 <form th:object="${incomeOutgo}" th:action="@{/income_outgo/{id}(id=*{id})}" th:method="put">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">日付</label>
                         <div class="col-sm-6">
+                            <!--<p><span class="error-message" th:if="${#fields.hasErrors('*{date}')}" th:errors="*{date}"></span></p>-->
                             <input type="date" class="form-control" name="date" th:value="*{date}">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">支出</label>
+                        <label class="col-sm-2 col-form-label">収入/支出</label>
                         <div class="col-sm-6">
+                            <p><span class="error-message" th:if="${#fields.hasErrors('*{cost}')}" th:errors="*{cost}"></span></p>
                             <input type="number" class="form-control" name="cost" th:field="*{cost}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">カテゴリ</label>
                         <div class="col-sm-6">
+                            <p><span class="error-message" th:if="${#fields.hasErrors('*{category_id}')}" th:errors="*{category_id}"></span></p>
                             <select class="custom-select" name="category_id">
                                 <option disabled>--支出--</option>
                                 <div th:each="category:${categories_outgo}" th:object="${category}">
@@ -75,6 +80,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">MEMO</label>
                         <div class="col-sm-6">
+                            <p><span class="error-message" th:if="${#fields.hasErrors('*{memo}')}" th:errors="*{memo}"></span></p>
                             <input type="text" class="form-control" name="memo" th:field="*{memo}">
                         </div>
                     </div>
@@ -82,6 +88,7 @@
                     <button class="btn btn-primary" type="submit">更新する</button>
                 </form>
             </div>
+
         </div>
 
     </div>
