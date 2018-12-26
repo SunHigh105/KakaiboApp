@@ -29,6 +29,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-devtools")
+    compile("org.springframework.boot:spring-boot-starter-jetty")
     // JPA Data (We are going to use Repositories, Entities, Hibernate, etc...)
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     // Use MySQL Connector-J
@@ -36,3 +37,5 @@ dependencies {
     testCompile("junit:junit")
 
 }
+// デプロイ時のデフォルトタスク
+defaultTasks "clean", "build"
