@@ -29,4 +29,8 @@ public class CategoryService {
     public void deleteById(Long id){
         categoryRepository.deleteById(id);
     }
+
+    public Integer incomeOutgoCount(Long id){
+        return categoryRepository.incomeOutgoCount(id);
+    }
 }

@@ -94,9 +94,14 @@ public class CategoryController {
 
     @DeleteMapping("{id}")
     public String destroy(@PathVariable Long id, RedirectAttributes deleteInfo){
-        categoryService.deleteById(id);
-        deleteInfo.addFlashAttribute("flash", "データを削除しました！");
-        return "redirect:/category/setting";
+        if(categoryService.incomeOutgoCount(id) > 0){
+            deleteInfo.addFlashAttribute("flash", "このカテゴリに紐づいたデータがあるため削除できません");
+            return "redirect:/category/setting";
+        }else{
+            categoryService.deleteById(id);
+            deleteInfo.addFlashAttribute("flash", "データを削除しました！");
+            return "redirect:/category/setting";
+        }
     }
 }
 
