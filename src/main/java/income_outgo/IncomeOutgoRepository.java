@@ -14,6 +14,8 @@ public interface IncomeOutgoRepository extends JpaRepository<IncomeOutgo, Long> 
     List<IncomeOutgo> findByMonth(@Param("startDate") Date startDate, @Param("lastDate") Date lastDate);
     @Query("SELECT i FROM IncomeOutgo i WHERE i.date >= :startYear AND i.date < :lastYear")
     List<IncomeOutgo> findByYear(@Param("startYear") Date startYear, @Param("lastYear") Date lastYear);
-    @Query("SELECT SUM(i.cost) FROM IncomeOutgo i WHERE i.type = :type AND (i.date >= :startDate AND i.date < :lastDate)")
+    @Query("SELECT SUM(i.cost) FROM IncomeOutgo i " +
+            "INNER JOIN FETCH Category c ON i.category_id = c.id " +
+            "WHERE c.type = :type AND (i.date >= :startDate AND i.date < :lastDate)")
     Integer costTotal(@Param("type") String type, @Param("startDate") Date startDate, @Param("lastDate") Date lastDate);
 }

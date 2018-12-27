@@ -65,13 +65,15 @@
                     <tbody>
                     <tr th:each="month:${monthList}" th:object="${month}">
                         <th th:text="*{date}"></th>
-                        <div th:switch="*{type}">
-                            <td th:case="'outgo'">支出</td>
-                            <td th:case="'income'">収入</td>
-                        </div>
                         <div th:each="category:${categories}">
                             <div th:switch="${category.id}">
-                                <td th:case="*{category_id}" th:text="${category.name}"></td>
+                                <div th:case = "*{category_id}">
+                                    <div th:switch="${category.type}">
+                                        <td th:case="'outgo'">支出</td>
+                                        <td th:case="'income'">収入</td>
+                                    </div>
+                                    <td th:text="${category.name}"></td>
+                                </div>
                             </div>
                         </div>
                         <td th:text="*{memo}"></td>

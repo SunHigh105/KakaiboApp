@@ -22,7 +22,6 @@ public class IncomeOutgo {
     private Date date;
     @Size(max=10, message = "MEMOは10文字以内で入力してください")
     private String memo;
-    private String type;
     @NotNull(message = "カテゴリを選択してください")
     private Long category_id;
 
@@ -56,14 +55,6 @@ public class IncomeOutgo {
 
     public void setMemo(String memo) {
         this.memo = memo;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Long getCategory_id() {
