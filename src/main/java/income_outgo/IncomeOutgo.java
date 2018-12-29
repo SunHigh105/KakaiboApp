@@ -8,6 +8,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class IncomeOutgo {
@@ -17,8 +18,8 @@ public class IncomeOutgo {
     @NotNull(message = "収入/支出を入力してください")
     @Max(value = 999999999, message = "収入/支出は9桁以内で入力してください")
     private Long cost;
-//    @NotNull(message = "日付を入力してください")
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "日付を入力してください")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     @Size(max=10, message = "MEMOは10文字以内で入力してください")
     private String memo;
@@ -46,7 +47,7 @@ public class IncomeOutgo {
     }
 
     public void setDate(String date) {
-        this.date = Date.valueOf(date);
+        this.date = java.sql.Date.valueOf(date);
     }
 
     public String getMemo() {

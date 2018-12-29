@@ -97,6 +97,9 @@ public class IncomeOutgoController {
         model.addAttribute("thisMonthPath", thisMonthPath());
         // 今年をリンクに入れる
         model.addAttribute("thisYearPath", thisYearPath());
+        // 今日の日付をデフォルトで入れておく
+        SimpleDateFormat todayFormat = new SimpleDateFormat("yyyy-MM-dd");
+        model.addAttribute("today", todayFormat.format(today()));
         return "income_outgo/new";
     }
 
@@ -206,6 +209,13 @@ public class IncomeOutgoController {
                          RedirectAttributes resistInfo){
         if(bindingResult.hasErrors()){
             System.out.println(bindingResult.getAllErrors());
+            // カテゴリを取得
+            model.addAttribute("categories_outgo", categories("outgo"));
+            model.addAttribute("categories_income", categories("income"));
+            //今月をリンクに入れる
+            model.addAttribute("thisMonthPath", thisMonthPath());
+            // 今年をリンクに入れる
+            model.addAttribute("thisYearPath", thisYearPath());
             return "income_outgo/new";
 //            return newIncomeOutgo(incomeOutgo, model);
         }else{
