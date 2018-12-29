@@ -46,7 +46,7 @@
 
             <div class="input-form" id="outgo" role="tabpanel" aria-labelledby="outgo-tab">
                 <h4>収支の編集</h4>
-                <form th:object="${incomeOutgo}" th:action="@{/income_outgo/{id}(id=*{id})}" th:method="put">
+                <form th:object="${incomeOutgo}" th:action="@{/income_outgo/{id}/edit(id=*{id})}" th:method="put">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">日付</label>
                         <div class="col-sm-6">

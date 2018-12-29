@@ -140,7 +140,7 @@ public class IncomeOutgoController {
         return "income_outgo/month";
     }
 
-    @GetMapping({"{id}","{id}/edit"})
+    @GetMapping("{id}/edit")
     public String edit(@PathVariable Long id,
                        Model model){
         IncomeOutgo incomeOutgo = incomeOutgoService.findById(id);
@@ -205,8 +205,9 @@ public class IncomeOutgoController {
                          Model model,
                          RedirectAttributes resistInfo){
         if(bindingResult.hasErrors()){
-            return newIncomeOutgo(incomeOutgo, model);
-//            return "/income_outgo/new";
+            System.out.println(bindingResult.getAllErrors());
+            return "income_outgo/new";
+//            return newIncomeOutgo(incomeOutgo, model);
         }else{
             incomeOutgoService.save(incomeOutgo);
             resistInfo.addFlashAttribute("flash", "データを登録しました！");
@@ -215,13 +216,23 @@ public class IncomeOutgoController {
     }
 
 
-    @PutMapping("{id}")
+    @PutMapping("{id}/edit")
     public String update(@PathVariable Long id,
                          @ModelAttribute @Validated IncomeOutgo incomeOutgo,
                          BindingResult bindingResult,
+                         Model model,
                          RedirectAttributes updateInfo){
         if(bindingResult.hasErrors()){
             System.out.println(bindingResult.getAllErrors());
+            // カテゴリ
+            model.addAttribute("categories_outgo", categories("outgo"));
+            model.addAttribute("categories_income", categories("income"));
+
+            //今月をリンクに入れる
+            model.addAttribute("thisMonthPath", thisMonthPath());
+
+            //今年をリンクに入れる
+            model.addAttribute("thisYearPath", thisYearPath());
             return "income_outgo/edit";
         }else{
             incomeOutgo.setId(id);
